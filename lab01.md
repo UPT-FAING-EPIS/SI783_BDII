@@ -75,3 +75,11 @@ Invoke-Sqlcmd -InputFile lab01-01.sql -ServerInstance '(local),16111' -Username 
 ```
 Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
 ```
+4.16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
+```
+docker rm -f SQLLNX01
+```
+4.17. Verificar la instancia de contenedor ya no se encuentra activa
+```
+docker ps
+```
