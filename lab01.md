@@ -14,6 +14,7 @@
   * Software:
     - Windows 10 64bit: Pro, Enterprise o Education (1607 Anniversary Update, Build 14393 o Superior)
     - Docker Desktop 
+    - Powershell versión 7.x
     - Microsoft SQL Server Management Studio en su última versión
 
 3. CONSIDERACIONES INICIALES
