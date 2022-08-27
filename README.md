@@ -29,7 +29,7 @@ wsl --set-default-version 2
 ```
 choco install wsl-ubuntu-2204
 ```
-7.1. Or download and install from https://aka.ms/wslubuntu2204
+> Or download and install from https://aka.ms/wslubuntu2204
 
 8. Install Docker Desktop with choco
 ```
