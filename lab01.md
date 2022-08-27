@@ -63,8 +63,15 @@ SELECT @@VERSION
 ```
 Install-Module SqlServer
 ```
-4.13. Ejecutar el siguiente comando el Powershell
+4.13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
 ```
-Invoke-Sqlcmd -query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+Invoke-Sqlcmd -Query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
 ```
-
+4.14. Ejecutar el siguiente comando en Powershell para generar una nueva base de datos.
+```
+Invoke-Sqlcmd -InputFile lab01-01.sql -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+```
+4.15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
+```
+Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+```
