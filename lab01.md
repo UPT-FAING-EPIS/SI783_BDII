@@ -57,3 +57,14 @@ docker ps
 ```
 SELECT @@VERSION
 ```
+4.11. Cerrar Microsoft SQL Server Management Studio
+
+4.12. Regresar a Powershell y ejecutar el siguiente commando
+```
+Install-Module SqlServer
+```
+4.13. Ejecutar el siguiente comando el Powershell
+```
+Invoke-Sqlcmd -query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+```
+
