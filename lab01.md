@@ -39,3 +39,7 @@ docker pull mcr.microsoft.com/mssql/server
 ```
 docker images
 ```
+4.7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+```
+docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’ --name SQLLNX01 mcr.microsoft.com/mssql/server
+```
