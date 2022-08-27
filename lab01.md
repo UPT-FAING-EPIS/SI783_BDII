@@ -1,5 +1,4 @@
-SESION DE LABORATORIO N° 01
-Instalación de una Instancia de Microsoft SQL Server
+# SESION DE LABORATORIO N° 01: Instalación de una Instancia de Microsoft SQL Server
 
 1. OBJETIVOS
   * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
@@ -47,4 +46,14 @@ docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’
 4.8. Verificar la instancia de contenedor este en ejecución
 ```
 docker ps
+```
+4.9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
+> Servidor: (local),16111
+> Autenticación: SQL Sever
+> Usuario: sa
+> Clave: Upt.2022
+
+4.10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+```
+SELECT @@VERSION
 ```
