@@ -1,9 +1,9 @@
 # SESION DE LABORATORIO N° 01: Instalación de una Instancia de Microsoft SQL Server
 
-1. OBJETIVOS
+## OBJETIVOS
   * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
 
-2. REQUERIMIENTOS
+## REQUERIMIENTOS
   * Conocimientos: 
     - Conocimientos básicos de administración de base de datos Microsoft SQL Server.
     - Conocimientos básicos de SQL.
@@ -17,69 +17,82 @@
     - Powershell versión 7.x
     - Microsoft SQL Server Management Studio en su última versión
 
-3. CONSIDERACIONES INICIALES
-  * Crear dos carpetas en una unidad donde se pueda modificar datos DATALNX y DATAWIN
+## CONSIDERACIONES INICIALES
+  * Clonar el repositorio mediante git para tener los recursos necesaarios
 
-4. DESARROLLO
-4.1. Iniciar la aplicación Docker Desktop:
-4.2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-4.3. Ejecutar el siguiente comando para verificar la versión de Docker
+## DESARROLLO
+1. Iniciar la aplicación Docker Desktop:
+2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
+3. Ejecutar el siguiente comando para verificar la versión de Docker
 ```
 docker version
 ```
-4.4. Ejecutar el siguiente comando para buscar las imagenes de conetenedores mssql
+4. Ejecutar el siguiente comando para buscar las imagenes de conetenedores mssql
 ```
 docker search mssql
 ```
-4.5. Descargar la imagen de docker de Microsoft SQL Server
+5. Descargar la imagen de docker de Microsoft SQL Server
 ```
 docker pull mcr.microsoft.com/mssql/server
 ```
-4.6. Verificar la imagen de docker descargada
+6. Verificar la imagen de docker descargada
 ```
 docker images
 ```
-4.7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
 ```
 docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’ --name SQLLNX01 mcr.microsoft.com/mssql/server
 ```
-4.8. Verificar la instancia de contenedor este en ejecución
+8. Verificar la instancia de contenedor este en ejecución
 ```
 docker ps
 ```
-4.9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
+9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
 > Servidor: (local),16111  
 > Autenticación: SQL Sever  
 > Usuario: sa  
 > Clave: Upt.2022  
 
-4.10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
 SELECT @@VERSION
 ```
-4.11. Cerrar Microsoft SQL Server Management Studio
+11. Cerrar Microsoft SQL Server Management Studio
 
-4.12. Regresar a Powershell y ejecutar el siguiente commando
+12. Regresar a Powershell y ejecutar el siguiente commando
 ```
 Install-Module SqlServer
 ```
-4.13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
+13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
 ```
 Invoke-Sqlcmd -Query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
 ```
-4.14. Ejecutar el siguiente comando en Powershell para generar una nueva base de datos.
+14. Ejecutar el siguiente comando en Powershell para generar una nueva base de datos.
 ```
 Invoke-Sqlcmd -InputFile lab01-01.sql -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
 ```
-4.15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
+15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
 ```
 Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
 ```
-4.16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
+16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
 ```
 docker rm -f SQLLNX01
 ```
-4.17. Verificar la instancia de contenedor ya no se encuentra activa
+17. Verificar la instancia de contenedor ya no se encuentra activa
 ```
 docker ps
 ```
+---
+## Actividades Encargadas
+1. ¿Con qué comando(s) exportaría la imagen de Docker de Microsoft SQL Server a otra PC o servidor?
+2. ¿Con qué comando(s) podría generar dos volúmenes para un contenedor para distribuir en un volumen el Archivo
+de Datos (.mdf) y en otro el Archivo Log (.ldf)?
+3. Genere un nuevo contenedor y cree la base de datos con las siguientes características.
+   Nombre : FINANCIERA
+   Archivos:
+   • DATOS (mdf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
+   • INDICES (ndf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
+   • HISTORICO (ndf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
+   • LOG (ldf) Tamaño Inicial : 10MB, Incremento: 10MB, Ilimitado
+   ¿Cuál sería el script SQL que generaría esta base de datos?
