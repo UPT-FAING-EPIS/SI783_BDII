@@ -25,13 +25,13 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 wsl --set-default-version 2
 ```
 
-7. Install ubuntu
+7. Install ubuntu with choco
 ```
 choco install wsl-ubuntu-2204
 ```
-or download from https://aka.ms/wslubuntu2204
+7.1. Or download and install from https://aka.ms/wslubuntu2204
 
-8. Install Docker Desktop
+8. Install Docker Desktop with choco
 ```
 choco install docker-desktop
 ```
