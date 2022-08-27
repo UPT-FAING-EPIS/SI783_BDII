@@ -1,6 +1,6 @@
 # Base de Datos II
 
-Prerequisitos
+### Pre requirements
 
 1. Open a Powershell terminal in administrator mode.
 
@@ -35,3 +35,11 @@ choco install wsl-ubuntu-2204
 ```
 choco install docker-desktop
 ```
+---
+
+### Optionals
+* Install Windows Terminal
+```
+choco install microsoft-windows-terminal
+```
+
