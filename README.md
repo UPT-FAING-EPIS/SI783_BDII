@@ -16,19 +16,21 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
-4. Download and install WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+4. Restart the machine.
 
-5. Set WSL version
+5. Download and install WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+6. Set WSL version
 ```
 wsl --set-default-version 2
 ```
 
-6. Install ubuntu
+7. Install ubuntu
 ```
 choco install wsl-ubuntu-2204
 ```
 
-7. Install Docker Desktop
+8. Install Docker Desktop
 ```
 choco install docker-desktop
 ```
