@@ -48,10 +48,10 @@ docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’
 docker ps
 ```
 4.9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
-> Servidor: (local),16111
-> Autenticación: SQL Sever
-> Usuario: sa
-> Clave: Upt.2022
+> Servidor: (local),16111  
+> Autenticación: SQL Sever  
+> Usuario: sa  
+> Clave: Upt.2022  
 
 4.10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
