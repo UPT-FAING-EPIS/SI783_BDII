@@ -54,5 +54,5 @@ choco install microsoft-windows-terminal
 ```
 | Package Manager | Command |
 | --- | --- |
-| WinGet | ```winget install Microsoft.Powershell``` |
+| WinGet | ``winget install Microsoft.Powershell`` |
 | Chocolatey | ```choco install microsoft-powershell``` |
