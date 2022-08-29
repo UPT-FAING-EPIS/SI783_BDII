@@ -98,7 +98,21 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
    choco install microsoft-powershell
    ```
    </details>
-
+1. Close this powershell and open a Powershell 7 terminal in administrator mode and run the following command.
+   ```
+   Install-Module PSReadLine -Force
+   ```
+1. Edit powershell profile file.
+   ```
+   nano $PROFILE
+   ```
+1. Add the following text to set command history search.
+   ```
+   Import-Module PSReadLine
+   Set-PSReadLineOption -PredictionSource History
+   Set-PSReadLineOption -PredictionViewStyle ListView
+   Set-PSReadLineOption -EditMode Windows
+   ```
 ### Windows Terminal
 
 1. Open a Powershell terminal in administrator mode and run the following command.
