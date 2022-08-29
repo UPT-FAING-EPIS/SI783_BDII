@@ -40,6 +40,7 @@ choco install docker-desktop
 * Install Powershell 7 
 ```powershell WinGet
 winget install Microsoft.Powershell
+```
 ```powershell Chocolatey
 choco install microsoft-powershell
 ```
