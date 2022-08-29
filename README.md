@@ -9,7 +9,7 @@
 ---
 ## Requirement Tools
 
-### Docker
+### Docker Desktop
 1. Open a Powershell terminal in administrator mode.
 1. Install Windows components (https://docs.microsoft.com/en-us/windows/wsl/install-manual)
 ```
