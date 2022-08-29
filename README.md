@@ -53,9 +53,17 @@ winget install Microsoft.WindowsTerminal
 ```
 choco install microsoft-windows-terminal
 ```
-```javascript I'm A tab
-console.log('Code Tab A');
-```
-```javascript I'm tab B
-console.log('Code Tab B');
-```
+{{% tabs %}}
+{{% tab "Groovy" %}}
+ standard fenced code block here
+{{% /tab %}}
+
+{{% tab "JavaScript" %}}
+ standard fenced code block here
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+ standard fenced code block here
+{{% /tab %}}
+
+{{% /tabs %}}
