@@ -40,7 +40,6 @@ choco install docker-desktop
 * Install Powershell 7 
 ```powershell WinGet
 winget install Microsoft.Powershell
-```
 ```powershell Chocolatey
 choco install microsoft-powershell
 ```
@@ -52,13 +51,3 @@ winget install Microsoft.WindowsTerminal
 ```
 choco install microsoft-windows-terminal
 ```
-## title {.tabset .tabset-fade}
-content above tabbed region.
-
-### tab Social-Media
-
-tab content Social-Media
-
-### tab Contact
-
-tab content  Contact
