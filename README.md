@@ -12,16 +12,16 @@
 ### Docker Desktop
 1. Open a Powershell terminal in administrator mode.
 1. Install Windows components (https://docs.microsoft.com/en-us/windows/wsl/install-manual)
-```
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-```
+   ```
+   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+   ```
 1. Restart the machine.
 1. Download and install WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 1. Set WSL version
-```
-wsl --set-default-version 2
-```
+   ```
+   wsl --set-default-version 2
+   ```
 1. Install ubuntu with choco
    <details><summary>WinGet</summary>
 
@@ -36,7 +36,7 @@ wsl --set-default-version 2
    ```
    </details>
 
-> Or download and install from https://aka.ms/wslubuntu2204
+   > Or download and install from https://aka.ms/wslubuntu2204
 
 1. Install Docker Desktop
    <details><summary>WinGet</summary>
