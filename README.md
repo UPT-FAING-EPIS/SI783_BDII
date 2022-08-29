@@ -1,12 +1,12 @@
 # Base de Datos II
 
 1. [Requirement Tools](                   <#requirement-tools>)
-   - [Docker](                            <#docker>)
+   - [Docker Desktop](                    <#docker-desktop>)
 3. [Optional Tools](                      <#optional-tools>)
    - [Chocolatey](                        <#chocolatey>)
-   - [Powershell 7](                      <#powershell>)
-   - [Windows Terminal](                  <#windowsterminal>)
-
+   - [Powershell 7](                      <#powershell-7>)
+   - [Windows Terminal](                  <#windows-terminal>)
+---
 ## Requirement Tools
 
 ### Docker
@@ -22,16 +22,36 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 ```
 wsl --set-default-version 2
 ```
-7. Install ubuntu with choco
-```
-choco install wsl-ubuntu-2204
-```
+1. Install ubuntu with choco
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Canonical.Ubuntu.2204
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install wsl-ubuntu-2204
+   ```
+   </details>
+
 > Or download and install from https://aka.ms/wslubuntu2204
 
-8. Install Docker Desktop with choco
-```
-choco install docker-desktop
-```
+1. Install Docker Desktop
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Docker.DockerDesktop
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install docker-desktop
+   ```
+   </details>
+
 ---
 ## Optional Tools
 
@@ -41,7 +61,7 @@ choco install docker-desktop
 ```
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
-### Chocolatey
+### Powershell 7
 
 1. Open a Powershell terminal in administrator mode and run the following command.
    <details><summary>WinGet</summary>
@@ -56,13 +76,20 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
    choco install microsoft-powershell
    ```
    </details>
-   
-* Install Windows Terminal with WinGet
-```
-winget install Microsoft.WindowsTerminal
-```
-* Install Windows Terminal with Chocolatey
-```
-choco install microsoft-windows-terminal
-```
+
+### Windows Terminal
+
+1. Open a Powershell terminal in administrator mode and run the following command.
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Microsoft.WindowsTerminal
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install microsoft-windows-terminal
+   ```
+   </details>
 
