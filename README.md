@@ -1,30 +1,27 @@
 # Base de Datos II
 
-### Pre requirements
+1. [Requirement Tools](                   <#requirement>)
+   - [Docker](                            <#docker>)
+3. [Optional Tools](                      <#optional>)
+   - [Chocolatey](                        <#chocolatey>)
+   - [Powershell 7](                      <#powershell>)
+   - [Windows Terminal](                  <#windowsterminal>)
 
+## Requirement Tools
+
+### Docker
 1. Open a Powershell terminal in administrator mode.
-
-2. Intall Chocolatey (https://chocolatey.org/install)
-
-```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-```
-
-3. Install Windows components (https://docs.microsoft.com/en-us/windows/wsl/install-manual)
+1. Install Windows components (https://docs.microsoft.com/en-us/windows/wsl/install-manual)
 ```
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
-
-4. Restart the machine.
-
-5. Download and install WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
-
-6. Set WSL version
+1. Restart the machine.
+1. Download and install WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+1. Set WSL version
 ```
 wsl --set-default-version 2
 ```
-
 7. Install ubuntu with choco
 ```
 choco install wsl-ubuntu-2204
@@ -36,22 +33,17 @@ choco install wsl-ubuntu-2204
 choco install docker-desktop
 ```
 ---
+## Optional Tools
 
-* Install Powershell 7 
-```powershell WinGet
-winget install Microsoft.Powershell
+### Chocolatey
+
+1. Open a Powershell terminal in administrator mode and run the following command. (https://chocolatey.org/install)
 ```
-```powershell Chocolatey
-choco install microsoft-powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
-* Install Windows Terminal with WinGet
-```
-winget install Microsoft.WindowsTerminal
-```
-* Install Windows Terminal with Chocolatey
-```
-choco install microsoft-windows-terminal
-```
+### Chocolatey
+
+1. Open a Powershell terminal in administrator mode and run the following command.
    <details><summary>WinGet</summary>
 
    ```
@@ -64,3 +56,13 @@ choco install microsoft-windows-terminal
    choco install microsoft-powershell
    ```
    </details>
+   
+* Install Windows Terminal with WinGet
+```
+winget install Microsoft.WindowsTerminal
+```
+* Install Windows Terminal with Chocolatey
+```
+choco install microsoft-windows-terminal
+```
+
