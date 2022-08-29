@@ -104,7 +104,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
    ```
 1. Edit powershell profile file.
    ```
-   nano $PROFILE
+   notepad $PROFILE
    ```
 1. Add the following text to set command history search.
    ```
