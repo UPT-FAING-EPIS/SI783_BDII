@@ -57,6 +57,9 @@ winget install Microsoft.WindowsTerminal
 choco install microsoft-windows-terminal
 ```
 <!-- Tab links -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial;}
 
@@ -97,6 +100,8 @@ body {font-family: Arial;}
   border-top: none;
 }
 </style>
+</head>
+<body>
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'London')">London</button>
   <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
