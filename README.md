@@ -37,8 +37,11 @@ choco install docker-desktop
 ```
 ---
 
-### Optionals
-* Install Powershell 7
+### Optionals {.tabset}
+
+#### tab 1
+#### tab 2
+* Install Powershell 7 
 ```javascript WinGet
 winget install Microsoft.Powershell
 ```
@@ -53,17 +56,3 @@ winget install Microsoft.WindowsTerminal
 ```
 choco install microsoft-windows-terminal
 ```
-{{% tabs %}}
-{{% tab "Groovy" %}}
- standard fenced code block here
-{{% /tab %}}
-
-{{% tab "JavaScript" %}}
- standard fenced code block here
-{{% /tab %}}
-
-{{% tab "Ruby" %}}
- standard fenced code block here
-{{% /tab %}}
-
-{{% /tabs %}}
