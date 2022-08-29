@@ -54,13 +54,13 @@ choco install microsoft-windows-terminal
 ```
    <details><summary>WinGet</summary>
 
-      ```
-         winget install Microsoft.Powershell
-      ```
+   ```
+   winget install Microsoft.Powershell
+   ```
    </details>
    <details><summary>Chocolatey</summary>
 
    ```
-      choco install microsoft-powershell
+   choco install microsoft-powershell
    ```
    </details>
