@@ -55,14 +55,14 @@ choco install microsoft-windows-terminal
 <details><summary>Winget</summary>
 <p>
 #### We can hide anything, even code!
-```powershell
-winget install Microsoft.Powershell
+```
+   winget install Microsoft.Powershell
 ```
 </p>
 </details>
 <details><summary>Chocolatey</summary>
 #### We can hide anything, even code!
-```powershell
+```
    choco install microsoft-powershell
 ```
 </details>
