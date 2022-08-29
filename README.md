@@ -113,6 +113,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
    Set-PSReadLineOption -PredictionViewStyle ListView
    Set-PSReadLineOption -EditMode Windows
    ```
+1. Save changes and close editor.
+1. Finally, close and reopen Powershell 7.
 ### Windows Terminal
 
 1. Open a Powershell terminal in administrator mode and run the following command.
