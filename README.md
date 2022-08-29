@@ -1,8 +1,8 @@
 # Base de Datos II
 
-1. [Requirement Tools](                   <#requirement>)
+1. [Requirement Tools](                   <#requirement-tools>)
    - [Docker](                            <#docker>)
-3. [Optional Tools](                      <#optional>)
+3. [Optional Tools](                      <#optional-tools>)
    - [Chocolatey](                        <#chocolatey>)
    - [Powershell 7](                      <#powershell>)
    - [Windows Terminal](                  <#windowsterminal>)
