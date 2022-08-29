@@ -54,8 +54,6 @@ choco install microsoft-windows-terminal
 ```
 <details>
    <summary>Winget</summary>
-
-   #### We can hide anything, even code!
    ```
       winget install Microsoft.Powershell
    ```
