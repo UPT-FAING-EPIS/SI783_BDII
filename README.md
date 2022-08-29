@@ -52,3 +52,8 @@ winget install Microsoft.WindowsTerminal
 ```
 choco install microsoft-windows-terminal
 ```
+``
+foo
+bar  
+baz
+``
