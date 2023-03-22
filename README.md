@@ -21,13 +21,23 @@ This tools are multiplatform so you can install in others machine platforms like
    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
    ```
+1. Download WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+   ```
+   curl -o wsl_update_x64.msi https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+   ```
 1. Restart the machine.
-1. Download and install WSL kernel update from https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
-1. Open again Powershell terminal in administrator mode and set WSL version
+   ```
+   shutdown /r /t 0
+   ```
+1. Open again a Powershell terminal in administrator mode and 
+   ```
+   .\wsl_update_x64.msi /quiet
+   ```
+1. Set WSL version
    ```
    wsl --set-default-version 2
    ```
-1. Install ubuntu with choco
+1. Install ubuntu Subsytem
    <details><summary>WinGet</summary>
 
    ```
@@ -42,7 +52,18 @@ This tools are multiplatform so you can install in others machine platforms like
    </details>
 
    > Or download and install from https://aka.ms/wslubuntu2204
-
+  
+1. Verify ubuntu Subsytem installed and use versión 2
+   ```
+   wsl -l -v
+   ```
+   This show something like this:
+   
+   NAME            STATE           VERSION
+   * Ubuntu-22.04    Stopped         2
+   
+   if not, start ubuntu subsytem in Windows and make necessary configurations, after re run prior command.
+   
 1. Install Docker Desktop
    <details><summary>WinGet</summary>
 
@@ -56,6 +77,28 @@ This tools are multiplatform so you can install in others machine platforms like
    choco install docker-desktop
    ```
    </details>
+
+1. logoff the machine.
+   ```
+   logoff
+   ```
+
+### Git
+1. Open a Powershell terminal in administrator mode and run the following command. 
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Git.Git
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install git-scm
+   ```
+   </details>
+   
+   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
 
 ### Azure Data Studio
 1. Open a Powershell terminal in administrator mode and run the following command. 
