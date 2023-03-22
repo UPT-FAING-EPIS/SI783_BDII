@@ -100,6 +100,25 @@ This tools are multiplatform so you can install in others machine platforms like
    
    > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
 
+
+### Visual Studio Code
+1. Open a Powershell terminal in administrator mode and run the following command. 
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Microsoft.VisualStudioCode
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install Microsoft.VisualStudioCode
+   ```
+   </details>
+   
+   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+
+
 ### Azure Data Studio
 1. Open a Powershell terminal in administrator mode and run the following command. 
    <details><summary>WinGet</summary>
