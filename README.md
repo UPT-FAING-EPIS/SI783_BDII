@@ -6,6 +6,8 @@ This tools are multiplatform so you can install in others machine platforms like
 
 1. [Requirement Tools](                   <#requirement-tools>)
    - [Docker Desktop](                    <#docker-desktop>)
+   - [Git](                               <#git>)
+   - [Visual Studio Code](                <#visual-studio-code>)
    - [Azure Data Studio](                 <#azure-data-studio>)
 1. [Optional Tools](                      <#optional-tools>)
    - [Chocolatey](                        <#chocolatey>)
@@ -98,7 +100,7 @@ This tools are multiplatform so you can install in others machine platforms like
    ```
    </details>
    
-   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+   > Or download and install from [https://git-scm.com/downloads]
 
 
 ### Visual Studio Code
@@ -116,7 +118,7 @@ This tools are multiplatform so you can install in others machine platforms like
    ```
    </details>
    
-   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+   > Or download and install from [https://code.visualstudio.com/download]
 
 
 ### Azure Data Studio
@@ -135,7 +137,44 @@ This tools are multiplatform so you can install in others machine platforms like
    </details>
    
    > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+
+
+### Net 6
+1. Open a Powershell terminal in administrator mode and run the following command. 
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Microsoft.DotNet.SDK.6
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install Microsoft.DotNet.SDK.6
+   ```
+   </details>
    
+   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+
+
+### Python
+1. Open a Powershell terminal in administrator mode and run the following command. 
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install Microsoft.AzureDataStudio
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install azure-data-studio
+   ```
+   </details>
+   
+   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+
+
 ---
 ## Optional Tools
 
@@ -177,6 +216,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
    ```
 1. Save changes and close editor.
 1. Finally, close and reopen Powershell 7.
+
 ### Windows Terminal
 
 1. Open a Powershell terminal in administrator mode and run the following command.
