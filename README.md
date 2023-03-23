@@ -154,7 +154,7 @@ This tools are multiplatform so you can install in others machine platforms like
    ```
    </details>
    
-   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+   > Or download and install from [https://dotnet.microsoft.com/en-us/download/dotnet/6.0]
 
 
 ### Python
@@ -172,7 +172,7 @@ This tools are multiplatform so you can install in others machine platforms like
    ```
    </details>
    
-   > Or download and install from [https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16]
+   > Or download and install from [https://www.python.org/downloads/]
 
 
 ---
