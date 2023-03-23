@@ -1,4 +1,4 @@
-# SESION DE LABORATORIO N° 01: Instalación de una Instancia de Microsoft SQL Server
+# SESION DE LABORATORIO N° 02: Instalación de una Instancia de Oracle Database
 
 ## OBJETIVOS
   * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
