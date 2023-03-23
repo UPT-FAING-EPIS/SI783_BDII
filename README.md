@@ -9,6 +9,8 @@ This tools are multiplatform so you can install in others machine platforms like
    - [Git](                               <#git>)
    - [Visual Studio Code](                <#visual-studio-code>)
    - [Azure Data Studio](                 <#azure-data-studio>)
+   - [Net 6](                             <#net-6>)
+   - [Python](                            <#python>)
 1. [Optional Tools](                      <#optional-tools>)
    - [Chocolatey](                        <#chocolatey>)
    - [Powershell 7](                      <#powershell-7>)
