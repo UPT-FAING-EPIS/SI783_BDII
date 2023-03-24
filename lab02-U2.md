@@ -22,28 +22,28 @@
 
 ## DESARROLLO
 1. Iniciar la aplicación Docker Desktop:
-2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-3. Ejecutar el siguiente comando para verificar la versión de Docker
+1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
+1. Ejecutar el siguiente comando para verificar la versión de Docker
 ```
 docker version
 ```
-4. Ejecutar el siguiente comando para buscar las imagenes de conetenedores mssql
+1. Iniciar sesion en el registro de contenedores de Oracle, colocar su usuario(correo) y contraseña cuando se lo pida. 
 ```
-docker search mssql
+docker login container-registry.oracle.com
 ```
-5. Descargar la imagen de docker de Microsoft SQL Server
+1. Descargar la imagen de docker de Microsoft SQL Server
 ```
-docker pull mcr.microsoft.com/mssql/server
+docker pull container-registry.oracle.com/database/express:latest
 ```
-6. Verificar la imagen de docker descargada
+1. Verificar la imagen de docker descargada
 ```
 docker images
 ```
-7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+1. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
 ```
 docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’ --name SQLLNX01 mcr.microsoft.com/mssql/server
 ```
-8. Verificar la instancia de contenedor este en ejecución
+1. Verificar la instancia de contenedor este en ejecución
 ```
 docker ps
 ```
