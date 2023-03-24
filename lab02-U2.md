@@ -22,46 +22,44 @@
 
 ## DESARROLLO
 1. Iniciar la aplicación Docker Desktop:
-1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-1. Ejecutar el siguiente comando para verificar la versión de Docker
+2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
+3. Ejecutar el siguiente comando para verificar la versión de Docker
 ```
 docker version
 ```
-1. Iniciar sesion en el registro de contenedores de Oracle, colocar su usuario(correo) y contraseña cuando se lo pida. 
+4. Iniciar sesion en el registro de contenedores de Oracle, colocar su usuario(correo) y contraseña cuando se lo pida. 
 ```
 docker login container-registry.oracle.com
 ```
-1. Descargar la imagen de docker de Microsoft SQL Server
+5. Descargar la imagen de docker de Microsoft SQL Server
 ```
 docker pull container-registry.oracle.com/database/express:latest
 ```
-1. Verificar la imagen de docker descargada
+6. Verificar la imagen de docker descargada
 ```
 docker images
 ```
-1. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
 ```
 docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’ --name SQLLNX01 mcr.microsoft.com/mssql/server
 ```
-1. Verificar la instancia de contenedor este en ejecución
+8. Verificar la instancia de contenedor este en ejecución
 ```
 docker ps
 ```
-9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
-> Servidor: (local),16111  
-> Autenticación: SQL Sever  
-> Usuario: sa  
-> Clave: Upt.2022  
-
+9. Esperar unos 45 segundos y ejecutar el siguiente comando:
+```
+docker exec -it ORACLE01 sqlplus / as sysdba
+```
 10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
-SELECT @@VERSION
+SELECT BANNER FROM v$version;
 ```
-11. Cerrar Microsoft SQL Server Management Studio
+11. Para salir escriba el comando exit.
 
 12. Regresar a Powershell y ejecutar el siguiente commando
 ```
-Install-Module SqlServer
+Install-Module OracleOCICmdlets
 ```
 13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
 ```
