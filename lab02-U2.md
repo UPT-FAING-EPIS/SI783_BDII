@@ -15,7 +15,8 @@ https://tsql.tech/how-to-read-data-from-oracle-database-via-powershell-without-u
     - Windows 10 64bit: Pro, Enterprise o Education (1607 Anniversary Update, Build 14393 o Superior)
     - Docker Desktop 
     - Powershell versión 7.x
-    - Microsoft SQL Server Management Studio en su última versión
+    - Cuenta de Oracle (generarla aqui https://container-registry.oracle.com/)
+    - SQL Developer (https://www.oracle.com/database/sqldeveloper/technologies/download/)
 
 ## CONSIDERACIONES INICIALES
   * Clonar el repositorio mediante git para tener los recursos necesaarios
@@ -57,21 +58,30 @@ SELECT BANNER FROM v$version;
 ```
 11. Para salir escriba el comando exit.
 
-12. Regresar a Powershell y ejecutar el siguiente commando
+12. En una pestaña nueva del navegador de internet acceder a la siguiente dirección:https://localhost:5500/em e Iniciar sesión con los siguientes datos
 ```
-Install-Module OracleOCICmdlets
+Usuario: sys
+Contraseña: Upt.2022
 ```
-13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
+13. Capture la pantalla de su servidor como parte de la actividad del laboratorio, anote el nombre de la instancia (SID).
+
+14. Iniciar el aplicativo Oracle SQL Developer, crear una nueva conexión con los siguientes parámetros:.
 ```
-Invoke-Sqlcmd -Query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+Name : OracleConexion
+Usuario: sys
+Contraseña: Upt.2022
+Rol: SYSDBA
+Nombre del Host: localhost
+Puerto: 1521
+SID: .......
 ```
-14. Ejecutar el siguiente comando en Powershell para generar una nueva base de datos.
+15. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
-Invoke-Sqlcmd -InputFile lab01-01.sql -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+SELECT * FROM ALL_TABLES
 ```
-15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
+15. Iniciar una nueva consulta, escribir (reemplazando con su nombre y Apellido) y ejecutar lo siguiente:
 ```
-Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+CREATE SMALLFILE TABLESPACE 'nombreApellido' DATAFILE 'u01/app/oracle/oradata/orcl/cursos.dbf' SIZE 50M AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO DEFAULT NOCOMPRESS
 ```
 16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
 ```
@@ -83,14 +93,9 @@ docker ps
 ```
 ---
 ## Actividades Encargadas
-1. ¿Con qué comando(s) exportaría la imagen de Docker de Microsoft SQL Server a otra PC o servidor?
-2. ¿Con qué comando(s) podría generar dos volúmenes para un contenedor para distribuir en un volumen el Archivo
-de Datos (.mdf) y en otro el Archivo Log (.ldf)?
-3. Genere un nuevo contenedor y cree la base de datos con las siguientes características.
-   Nombre : FINANCIERA
-   Archivos:
-   • DATOS (mdf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
-   • INDICES (ndf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
-   • HISTORICO (ndf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
-   • LOG (ldf) Tamaño Inicial : 10MB, Incremento: 10MB, Ilimitado
-   ¿Cuál sería el script SQL que generaría esta base de datos?
+1. Genere un nuevo contenedor y cree un espacio de tablas con las siguientes características.
+Nombre : FINANCIERA:
+• DATOS (dbf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
+• INDICES (dbf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
+• HISTORICO (dbf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
+¿Cuál sería el script SQL que generaría esta base de datos?
