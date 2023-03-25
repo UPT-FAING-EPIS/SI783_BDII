@@ -94,8 +94,11 @@ docker ps
 ---
 ## Actividades Encargadas
 1. Genere un nuevo contenedor y cree un espacio de tablas con las siguientes características.
+
 Nombre : FINANCIERA:
-• DATOS (dbf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
-• INDICES (dbf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
-• HISTORICO (dbf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
+
+- DATOS (dbf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
+- INDICES (dbf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
+- HISTORICO (dbf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
+
 ¿Cuál sería el script SQL que generaría esta base de datos?
