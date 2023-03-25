@@ -81,7 +81,7 @@ SELECT * FROM ALL_TABLES
 ```
 15. Iniciar una nueva consulta, escribir (reemplazando con su nombre y Apellido) y ejecutar lo siguiente:
 ```
-CREATE SMALLFILE TABLESPACE 'nombreApellido' DATAFILE 'u01/app/oracle/oradata/orcl/cursos.dbf' SIZE 50M AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO DEFAULT NOCOMPRESS
+CREATE SMALLFILE TABLESPACE 'nombreApellido' DATAFILE '/opt/oracle/oradata/XE/cursos.dbf' SIZE 50M AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO DEFAULT NOCOMPRESS
 ```
 16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
 ```
