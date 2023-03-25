@@ -1,5 +1,5 @@
 # SESION DE LABORATORIO N° 02: Instalación de una Instancia de Oracle Database
-https://tsql.tech/how-to-read-data-from-oracle-database-via-powershell-without-using-odbc-or-installing-oracle-client-and-import-it-to-sql-server-too/
+
 ## OBJETIVOS
   * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
 
