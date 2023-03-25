@@ -42,7 +42,7 @@ docker images
 ```
 7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
 ```
-docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’ --name SQLLNX01 mcr.microsoft.com/mssql/server
+docker run --name ORACLE01 -d -p 1521:1521 -p 5500:5500 -e ORACLE_PWD='upt.2023' container-registry.oracle.com/database/express
 ```
 8. Verificar la instancia de contenedor este en ejecución
 ```
