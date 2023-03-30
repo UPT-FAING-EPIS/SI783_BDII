@@ -12,7 +12,7 @@ This tools are multiplatform so you can install in others machine platforms like
    - [Net 6](                             <#net-6>)
    - [Python](                            <#python>)
    - [AWS CLI](                           <#aws-cli>)
-   - [DBeaver](                           <#dbeaver>)
+   - [DBeaver CE](                        <#dbeaver-ce>)
 1. [Optional Tools](                      <#optional-tools>)
    - [Chocolatey](                        <#chocolatey>)
    - [Powershell 7](                      <#powershell-7>)
@@ -193,9 +193,9 @@ This tools are multiplatform so you can install in others machine platforms like
    ```
    </details>
    
-   > Or download and install from [https://www.python.org/downloads/]
+   > Or download and install from [https://aws.amazon.com/es/cli/]
 
-### DBeaver
+### DBeaver CE
 1. Open a Powershell terminal in administrator mode and run the following command. 
    <details><summary>WinGet</summary>
 
@@ -210,7 +210,7 @@ This tools are multiplatform so you can install in others machine platforms like
    ```
    </details>
    
-   > Or download and install from [https://www.python.org/downloads/]
+   > Or download and install from [https://dbeaver.io/download/]
 
 ---
 ## Optional Tools
