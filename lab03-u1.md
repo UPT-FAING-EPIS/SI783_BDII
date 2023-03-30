@@ -76,7 +76,7 @@ Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -
 ```
 16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
 ```
-docker rm -f SQLLNX01
+aws rds delete-db-instance --db-instance-identifier rds-mysql-upt-01 --skip-final-snapshot
 ```
 17. Verificar la instancia de contenedor ya no se encuentra activa
 ```
