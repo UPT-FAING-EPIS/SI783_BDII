@@ -11,6 +11,8 @@ This tools are multiplatform so you can install in others machine platforms like
    - [Azure Data Studio](                 <#azure-data-studio>)
    - [Net 6](                             <#net-6>)
    - [Python](                            <#python>)
+   - [AWS CLI](                           <#aws-cli>)
+   - [DBeaver](                           <#dbeaver>)
 1. [Optional Tools](                      <#optional-tools>)
    - [Chocolatey](                        <#chocolatey>)
    - [Powershell 7](                      <#powershell-7>)
@@ -176,6 +178,39 @@ This tools are multiplatform so you can install in others machine platforms like
    
    > Or download and install from [https://www.python.org/downloads/]
 
+### AWS CLI
+1. Open a Powershell terminal in administrator mode and run the following command. 
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install aws.cli
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install awscli
+   ```
+   </details>
+   
+   > Or download and install from [https://www.python.org/downloads/]
+
+### DBeaver
+1. Open a Powershell terminal in administrator mode and run the following command. 
+   <details><summary>WinGet</summary>
+
+   ```
+   winget install dbeaver
+   ```
+   </details>
+   <details><summary>Chocolatey</summary>
+
+   ```
+   choco install dbeaver
+   ```
+   </details>
+   
+   > Or download and install from [https://www.python.org/downloads/]
 
 ---
 ## Optional Tools
