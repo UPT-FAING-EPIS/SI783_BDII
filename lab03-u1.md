@@ -1,4 +1,4 @@
-# SESION DE LABORATORIO N° 01: Instalación de una Instancia de Microsoft SQL Server
+# SESION DE LABORATORIO N° 03: Instalación de una instancia de base de datos en AWS
 
 ## OBJETIVOS
   * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
@@ -15,6 +15,7 @@
     - Windows 10 64bit: Pro, Enterprise o Education (1607 Anniversary Update, Build 14393 o Superior)
     - Docker Desktop 
     - Powershell versión 7.x
+    - AWS CLI
     - DBeaver en su última versión
 
 ## CONSIDERACIONES INICIALES
@@ -38,60 +39,36 @@ aws configure
 ```
 aws rds describe-db-instances
 ```
-7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+8. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
 ```
 aws rds create-db-instance --db-instance-identifier rds-mysql-upt-01 --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password upt.2023 --allocated-storage 20
 ```
-8. Verificar la instancia de contenedor este en ejecución
+9. Verificar la instancia de base de datos haya sido creada
 ```
-docker ps
+aws rds describe-db-instances
 ```
-9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
-> Servidor: (local),16111  
-> Autenticación: SQL Sever  
-> Usuario: sa  
-> Clave: Upt.2022  
+10. Esperar unos segundos e iniciar la aplicación DBeaver, y conectar con los siguientes datos:
+> Servidor: (url o nombre publico)
+> Puerto: 3306  
+> Usuario: admin  
+> Clave: upt.2023
 
-10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+11. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
-SELECT @@VERSION
+SELECT VERSION();
 ```
-11. Cerrar Microsoft SQL Server Management Studio
+12. Cerrar DBeaver
 
-12. Regresar a Powershell y ejecutar el siguiente commando
-```
-Install-Module SqlServer
-```
-13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
-```
-Invoke-Sqlcmd -Query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
-```
-14. Ejecutar el siguiente comando en Powershell para generar una nueva base de datos.
-```
-Invoke-Sqlcmd -InputFile lab01-01.sql -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
-```
-15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
-```
-Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
-```
-16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
+13. Iniciar la consola de AWS del modulo Learner Lab y verificar la creación y ejecuciòn de la instancia de base de datos (Realizar una captura de pantalla para su informe)
+
+14. Ejecutar el siguiente comando en Powershell para eliminar la instancia generado.
 ```
 aws rds delete-db-instance --db-instance-identifier rds-mysql-upt-01 --skip-final-snapshot
 ```
-17. Verificar la instancia de contenedor ya no se encuentra activa
+15. Verificar la instancia de contenedor ya no se encuentra activa
 ```
-docker ps
+aws rds describe-db-instances
 ```
 ---
 ## Actividades Encargadas
-1. ¿Con qué comando(s) exportaría la imagen de Docker de Microsoft SQL Server a otra PC o servidor?
-2. ¿Con qué comando(s) podría generar dos volúmenes para un contenedor para distribuir en un volumen el Archivo
-de Datos (.mdf) y en otro el Archivo Log (.ldf)?
-3. Genere un nuevo contenedor y cree la base de datos con las siguientes características.
-   Nombre : FINANCIERA
-   Archivos:
-   • DATOS (mdf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
-   • INDICES (ndf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
-   • HISTORICO (ndf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
-   • LOG (ldf) Tamaño Inicial : 10MB, Incremento: 10MB, Ilimitado
-   ¿Cuál sería el script SQL que generaría esta base de datos?
+1. Generar uns nueva instancia de base de datos utilizando Terraform.
