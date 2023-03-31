@@ -41,14 +41,14 @@ aws rds describe-db-instances
 ```
 8. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
 ```
-aws rds create-db-instance --db-instance-identifier rds-mysql-upt-01 --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password upt.2023 --allocated-storage 20
+aws rds create-db-instance --db-instance-identifier rds-mysql-upt-01 --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password upt.2023 --allocated-storage 20 --backup-retention-period 0
 ```
 9. Verificar la instancia de base de datos haya sido creada
 ```
 aws rds describe-db-instances
 ```
 10. Esperar unos segundos e iniciar la aplicación DBeaver, y conectar con los siguientes datos:
-> Servidor: (url o nombre publico)
+> Servidor: (url o nombre publico)  
 > Puerto: 3306  
 > Usuario: admin  
 > Clave: upt.2023
