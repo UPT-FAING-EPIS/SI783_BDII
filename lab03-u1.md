@@ -25,7 +25,7 @@
 1. En un navegado de internet, iniciar el laboratorio de Learner Lab en AWS Academy.
 2. Una vez iniciado el laboratorio (AWS con semaforo verde), hacer click en la pestaña AWS Details, y hacer click en el boton Show al lado de AWS CLI, copiar los valores
 3. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-4. Ejecutar el siguiente comando para guardar las credenciales
+4. Ejecutar el siguiente comando para guardar las credenciales (de ser necesario crear previamente la carpeta .aws)
 ```
 notepad ./.aws/credentials
 ```
