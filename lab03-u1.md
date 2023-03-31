@@ -35,37 +35,38 @@ notepad ./.aws/credentials
 aws configure
 ```
 7. Presionar 2 veces enter y cuando se solicite Default region name colocar: us-east-1, luego presionar una vez mas enter para terminar la configuración.
-6. Verificar la imagen de docker descargada
+
+8. Verificar las instancias de base de datos creadas.
 ```
 aws rds describe-db-instances
 ```
-8. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+9. Crear una instancia de base de datos
 ```
 aws rds create-db-instance --db-instance-identifier rds-mysql-upt-01 --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password upt.2023 --allocated-storage 20 --backup-retention-period 0
 ```
-9. Verificar la instancia de base de datos haya sido creada
+10. Verificar la instancia de base de datos haya sido creada
 ```
 aws rds describe-db-instances
 ```
-10. Esperar unos segundos e iniciar la aplicación DBeaver, y conectar con los siguientes datos:
+11. Esperar unos segundos e iniciar la aplicación DBeaver, y conectar con los siguientes datos:
 > Servidor: (url o nombre publico)  
 > Puerto: 3306  
 > Usuario: admin  
 > Clave: upt.2023
 
-11. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+12. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
 SELECT VERSION();
 ```
-12. Cerrar DBeaver
+13. Cerrar DBeaver
 
-13. Iniciar la consola de AWS del modulo Learner Lab y verificar la creación y ejecuciòn de la instancia de base de datos (Realizar una captura de pantalla para su informe)
+14. Iniciar la consola de AWS del modulo Learner Lab y verificar la creación y ejecuciòn de la instancia de base de datos (Realizar una captura de pantalla para su informe)
 
-14. Ejecutar el siguiente comando en Powershell para eliminar la instancia generado.
+15. Ejecutar el siguiente comando en Powershell para eliminar la instancia generado.
 ```
 aws rds delete-db-instance --db-instance-identifier rds-mysql-upt-01 --skip-final-snapshot
 ```
-15. Verificar la instancia de contenedor ya no se encuentra activa
+16. Verificar la instancia de contenedor ya no se encuentra activa
 ```
 aws rds describe-db-instances
 ```
