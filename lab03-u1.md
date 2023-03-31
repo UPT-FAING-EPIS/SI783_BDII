@@ -42,7 +42,7 @@ aws rds describe-db-instances
 ```
 9. Crear una instancia de base de datos
 ```
-aws rds create-db-instance --db-instance-identifier rds-mysql-upt-01 --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password upt.2023 --allocated-storage 20 --backup-retention-period 0
+aws rds create-db-instance --db-instance-identifier rds-upt-mysql-01 --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password upt.2023 --allocated-storage 20 --backup-retention-period 0
 ```
 10. Verificar la instancia de base de datos haya sido creada
 ```
@@ -73,3 +73,8 @@ aws rds describe-db-instances
 ---
 ## Actividades Encargadas
 1. Generar uns nueva instancia de base de datos utilizando Terraform.
+
+
+[comment]: <> (aws rds create-db-instance --engine sqlserver-ex --engine-version 14.00.3281.6.v1 --db-instance-identifier rds-upt-mssql-01 --allocated-storage 20 --db-instance-class db.t3.small --master-username admin --master-user-password upt.2023 --backup-retention-period 0 --storage-type standard --port 1433 --publicly-accessible)
+[comment]: <> (https://www.mssqltips.com/sqlservertip/7469/aws-cli-deploy-amazon-rds-sql-server-instance/)
+[comment]: <> (https://www.tutorialspoint.com/amazonrds/amazonrds_postgressql_creating_db.htm)
