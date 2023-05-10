@@ -34,7 +34,7 @@ docker run --name redisdb -p 6379:6379 -d redis
 ```
 docker exec -it redisdb redis-cli
 ```
-5. Una vez dentro de interfaz de linea de comandos, ejecutar los siguientes comandos para establecer un objeto clave-valor y luego recuperarlo
+5. Una vez dentro de interfaz de linea de comandos (CLI), ejecutar los siguientes comandos para establecer un objeto clave-valor y luego recuperarlo
 ```
 set clave "upt2023"
 get clave
@@ -134,18 +134,24 @@ namespace App.Redis.Api.Controllers
     }
 }
 ```
-12. Regresar a Powershell y ejecutar el siguiente commando
+8. Ejecutar el paso 4 (Parte II) para ejecutar la aplicación y luego verificar como indica el paso 5 (Parte II). Se deberia obtener dos resultados
+```JSON
+// Primer request
+{"isCached":false,"myTodos":["shopping","Watch Movie","Gardening"]}
+// Posteriores requests
+{"isCached":true,"myTodos":["shopping","Watch Movie","Gardening"]}
 ```
-Install-Module SqlServer
+9. Ejecutar el paso 4 (Parte I) para iniciar la CLI de Redis y escribir el siguiente comando.
 ```
-13. Ejecutar el siguiente comando el Powershell para consultar la versión del motor de base de datos.
+keys *
 ```
-Invoke-Sqlcmd -Query 'SELECT @@VERSION' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+10. Despues de esto la CLI deberia responder con el siguiente resultado.
 ```
-14. Ejecutar el siguiente comando en Powershell para generar una nueva base de datos.
+1) "_todos"
 ```
-Invoke-Sqlcmd -InputFile lab01-01.sql -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
-```
+
+### Parte 3: Estableciendo Expiración al cache de Datos
+
 15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
 ```
 Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
