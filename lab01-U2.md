@@ -79,16 +79,61 @@ namespace App.Redis.Api.Controllers
 dotnet build
 dotnet run
 ```
-5. Despues de unos segundos se pintara en el terminal el acceso la url del API REST creado, por ejemplo http://localhost:5162/Todos (tener en cuenta que el puerto puede variear en su PC). Abrir un navegador de internet y pedar esa url. El resultado beria ser similar a:
+5. Despues de unos segundos se pintara en el terminal el acceso la url del API REST creado, por ejemplo http://localhost:5162/Todos (tener en cuenta que el puerto puede variear en su PC). Abrir un navegador de internet y colocar la URL anterior. El resultado a obtener deberia ser similar a:
 ```JSON
 {"isCached":false,"myTodos":["shopping","Watch Movie","Gardening"]}
 ```
-10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+6. Volver a Visual Studio Code y en el archivo Program.cs agregar la siguiente linea después de `var builder = WebApplication.CreateBuilder(args)`:
+```C#
+builder.Services.AddStackExchangeRedisCache( options => options.Configuration = "localhost:6379" );
 ```
-SELECT @@VERSION
-```
-11. Cerrar Microsoft SQL Server Management Studio
+7. Modificar el archivo TodosController.cs con el siguiente código:
+```C#
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 
+namespace App.Redis.Api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class TodosController : ControllerBase
+    {
+	    List<string> todos = new List<string> { "shopping", "Watch Movie", "Gardening" };
+        private readonly IDistributedCache _distributedCache;
+
+        public TodosController(IDistributedCache distributedCache)
+        {
+            _distributedCache = distributedCache;
+        }
+
+        [HttpGet(Name = "All")]
+        public async Task<IActionResult> GetAll()
+        {
+            List<string> myTodos = new List<string>();
+            bool IsCached = false;
+            string? cachedTodosString = string.Empty;
+            cachedTodosString = await _distributedCache.GetStringAsync("_todos");
+            if (!string.IsNullOrEmpty(cachedTodosString))
+            {
+                // loaded data from the redis cache.
+                myTodos = JsonSerializer.Deserialize<List<string>>(cachedTodosString);
+                IsCached = true;
+            }
+            else
+            {
+                // loading from code (in real-time from database)
+                // then saving to the redis cache 
+                myTodos = todos;
+                IsCached = false;
+                cachedTodosString = JsonSerializer.Serialize<List<string>>(todos);
+                await _distributedCache.SetStringAsync("_todos", cachedTodosString);
+            }
+            return Ok(new { IsCached, myTodos });
+        }
+    }
+}
+```
 12. Regresar a Powershell y ejecutar el siguiente commando
 ```
 Install-Module SqlServer
