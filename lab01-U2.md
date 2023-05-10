@@ -42,6 +42,7 @@ get clave
 6. Finalmente escribir "exit" para salir de interfaz de linea de comandos de Redis
 
 
+
 ### PARTE II: Construyendo el API
 
 1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando
@@ -152,6 +153,7 @@ keys *
 ```
 
 
+
 ### Parte III: Estableciendo Expiración al cache de Datos
 
 15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
@@ -168,14 +170,4 @@ docker ps
 ```
 ---
 ## Actividades Encargadas
-1. ¿Con qué comando(s) exportaría la imagen de Docker de Microsoft SQL Server a otra PC o servidor?
-2. ¿Con qué comando(s) podría generar dos volúmenes para un contenedor para distribuir en un volumen el Archivo
-de Datos (.mdf) y en otro el Archivo Log (.ldf)?
-3. Genere un nuevo contenedor y cree la base de datos con las siguientes características.
-   Nombre : FINANCIERA
-   Archivos:
-   • DATOS (mdf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
-   • INDICES (ndf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
-   • HISTORICO (ndf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
-   • LOG (ldf) Tamaño Inicial : 10MB, Incremento: 10MB, Ilimitado
-   ¿Cuál sería el script SQL que generaría esta base de datos?
+1. Genere un nuevo controlador que se conecte a una tabla de una base de datos relacional y guarde la información en Redis y luego pueda consultarla desde Redis con una expiraciòn de 10 minutos.
