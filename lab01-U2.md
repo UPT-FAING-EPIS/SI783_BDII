@@ -21,27 +21,58 @@
   * Clonar el repositorio mediante git para tener los recursos necesaarios
 
 ## DESARROLLO
+
+### PARTE I: Desplegando la base de datos
+
 1. Iniciar la aplicación Docker Desktop:
 2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-3. Ejecutar el siguiente comando para verificar la versión de Docker
+3. Ejecutar el siguiente comando para crear una nueva instancia de la base de datos Redis
 ```
-docker version
+docker run --name redisdb -p 6379:6379 -d redis
 ```
-4. Ejecutar el siguiente comando para buscar las imagenes de conetenedores mssql
+4. Ejecutar el siguiente comando para iniciar sesión y conectarse al gestor de base de datos
 ```
-docker search mssql
+docker exec -it redisdb redis-cli
 ```
-5. Descargar la imagen de docker de Microsoft SQL Server
+5. Una vez dentro de interfaz de linea de comandos, ejecutar los siguientes comandos para establecer un objeto clave-valor y luego recuperarlo
 ```
-docker pull mcr.microsoft.com/mssql/server
+set clave "upt2023"
+get clave
 ```
-6. Verificar la imagen de docker descargada
+6. Finalmente escribir "exit" para salir de interfaz de linea de comandos de Redis
+
+### PARTE II: Construyendo el API
+
+1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando
 ```
-docker images
+dotnet new webapi -o App.Redis.Api
 ```
-7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+2. Acceder a la carpeta recien creada y adicionar la libreria de Redis para Net.
 ```
-docker run -d -p 16111:1433 -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=Upt.2022’ --name SQLLNX01 mcr.microsoft.com/mssql/server
+cd .\App.Redis.Api\
+dotnet add pakcage Microsoft.Extensions.Caching.StackExchangeRedis
+```
+3. Iniciar Visual Studio Code tomando como base la carpeta generada (App.Redis.Api). Dentro de la carpeta Controllers generar un archivo TodosController.cs e introducir el siguiente código
+```C#
+using Microsoft.AspNetCore.Mvc;
+
+namespace App.Redis.Api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class TodosController : ControllerBase
+    {
+	    List<string> todos = new List<string> { "shopping", "Watch Movie", "Gardening" };
+
+        [HttpGet(Name = "All")]
+        public async Task<IActionResult> GetAll()
+        {
+            List<string> myTodos = todos;
+            bool IsCached = false;
+            return Ok(new { IsCached, myTodos });
+        }
+    }
+}
 ```
 8. Verificar la instancia de contenedor este en ejecución
 ```
