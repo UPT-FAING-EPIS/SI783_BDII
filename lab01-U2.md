@@ -62,7 +62,7 @@ namespace App.Redis.Api.Controllers
     [Route("[controller]")]
     public class TodosController : ControllerBase
     {
-	    List<string> todos = new List<string> { "shopping", "Watch Movie", "Gardening" };
+	List<string> todos = new List<string> { "shopping", "Watch Movie", "Gardening" };
 
         [HttpGet(Name = "All")]
         public async Task<IActionResult> GetAll()
@@ -74,16 +74,15 @@ namespace App.Redis.Api.Controllers
     }
 }
 ```
-8. Verificar la instancia de contenedor este en ejecución
+4. Abrir un terminal en Visual Studio Code (Ctrl+Ñ) o voler al terminal abierto, y ejecutar los siguientes comandos para compitar y ejecutar la aplicación. 
 ```
-docker ps
+dotnet build
+dotnet run
 ```
-9. Esperar unos segundos e iniciar la aplicación Microsoft SQL Server Management Studio, y conectar con los siguientes datos:
-> Servidor: (local),16111  
-> Autenticación: SQL Sever  
-> Usuario: sa  
-> Clave: Upt.2022  
-
+5. Despues de unos segundos se pintara en el terminal el acceso la url del API REST creado, por ejemplo http://localhost:5162/Todos (tener en cuenta que el puerto puede variear en su PC). Abrir un navegador de internet y pedar esa url. El resultado beria ser similar a:
+```JSON
+{"isCached":false,"myTodos":["shopping","Watch Movie","Gardening"]}
+```
 10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
 SELECT @@VERSION
