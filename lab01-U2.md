@@ -41,6 +41,7 @@ get clave
 ```
 6. Finalmente escribir "exit" para salir de interfaz de linea de comandos de Redis
 
+
 ### PARTE II: Construyendo el API
 
 1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando
@@ -150,7 +151,8 @@ keys *
 1) "_todos"
 ```
 
-### Parte 3: Estableciendo Expiración al cache de Datos
+
+### Parte III: Estableciendo Expiración al cache de Datos
 
 15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
 ```
