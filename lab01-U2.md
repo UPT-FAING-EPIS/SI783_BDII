@@ -163,7 +163,7 @@ builder.Services.AddStackExchangeRedisCache( options => {
     options.Configuration = "localhost:6379"; options.InstanceName = "App.Redis.Api"; } );
 ```
 2. Asimismo modificar el archivo TodosController.cs, a fin de establecer una expiración de 30 a 60 segundos.
-```
+```C#
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -214,10 +214,22 @@ namespace App.Redis.Api.Controllers
     }
 }
 ```
-17. Verificar la instancia de contenedor ya no se encuentra activa
+3. Ejecutar los pasos del 8 al 10 (Parte II) para verificar los resultados.
+
+
+### Parte IV: Eliminando el cache
+
+1. En Visual Studio Code, adicionar un metodo a la clase TodosController, que permitica eliminar una clave
+```C#
+[HttpGet("clear-cache/{key}")]
+public async Task<IActionResult> ClearCache(string key)
+{
+  await _distributedCache.RemoveAsync(key);
+  return Ok(new { Message = $"cleared cache for key -{key}" });
+}
 ```
-docker ps
-```
+2. En el CLI de Redis generar un nuevo objeto clave valor con el nombre llave y luego volver al navegador e introduzca la siguiente url http://localhost:5162/Todos/clear-cache/llave. Verificar que se haya eliminado los datos correspondientes.
+
 ---
 ## Actividades Encargadas
 1. Genere un nuevo controlador que se conecte a una tabla de una base de datos relacional y guarde la información en Redis y luego pueda consultarla desde Redis con una expiraciòn de 10 minutos.
