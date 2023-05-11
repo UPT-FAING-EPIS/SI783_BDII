@@ -52,7 +52,7 @@ dotnet new webapi -o App.Redis.Api
 2. Acceder a la carpeta recien creada y adicionar la libreria de Redis para Net.
 ```
 cd .\App.Redis.Api\
-dotnet add pakcage Microsoft.Extensions.Caching.StackExchangeRedis
+dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
 ```
 3. Iniciar Visual Studio Code tomando como base la carpeta generada (App.Redis.Api). Dentro de la carpeta Controllers generar un archivo TodosController.cs e introducir el siguiente código
 ```C#
