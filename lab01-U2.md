@@ -154,11 +154,13 @@ keys *
 
 
 
-### Parte III: Estableciendo Expiración al cache de Datos
+### Parte III: Estableciendo expiración al cache de datos
 
-15. Ejecutar el siguiente comando en Powershell para verificar que se ha generado la base de datos.
-```
-Invoke-Sqlcmd -Query 'SELECT * FROM sys.databases WHERE name = ''BIBLIOTECA''' -ServerInstance '(local),16111' -Username 'sa' -Password 'Upt.2022'
+1. En Visual Studio Code, en el archivo Program.cs reemplazar la linea `builder.Services.AddStackExchangeRedisCache( options => options.Configuration = "localhost:6379" );`
+, por lo siguiente:
+```C#
+builder.Services.AddStackExchangeRedisCache( options => { 
+    options.Configuration = "localhost:6379"; options.InstanceName = "App.Redis.Api"; } );
 ```
 16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
 ```
