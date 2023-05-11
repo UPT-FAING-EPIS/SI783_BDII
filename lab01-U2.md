@@ -157,14 +157,62 @@ keys *
 ### Parte III: Estableciendo expiración al cache de datos
 
 1. En Visual Studio Code, en el archivo Program.cs reemplazar la linea `builder.Services.AddStackExchangeRedisCache( options => options.Configuration = "localhost:6379" );`
-, por lo siguiente:
+, por la siguiente instrucción, con esto se modificará el nombre del Store en Redis donde se estaban almacenando los datos:
 ```C#
 builder.Services.AddStackExchangeRedisCache( options => { 
     options.Configuration = "localhost:6379"; options.InstanceName = "App.Redis.Api"; } );
 ```
-16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
+2. Asimismo modificar el archivo TodosController.cs, a fin de establecer una expiración de 30 a 60 segundos.
 ```
-docker rm -f SQLLNX01
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+
+namespace App.Redis.Api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class TodosController : ControllerBase
+    {
+	    List<string> todos = new List<string> { "shopping", "Watch Movie", "Gardening" };
+        private readonly IDistributedCache _distributedCache;
+
+        public TodosController(IDistributedCache distributedCache)
+        {
+            _distributedCache = distributedCache;
+        }
+
+        [HttpGet(Name = "All")]
+        public async Task<IActionResult> GetAll()
+        {
+            List<string> myTodos = new List<string>();
+            bool IsCached = false;
+            string? cachedTodosString = string.Empty;
+            cachedTodosString = await _distributedCache.GetStringAsync("_todos");
+            if (!string.IsNullOrEmpty(cachedTodosString))
+            {
+                // loaded data from the redis cache.
+                myTodos = JsonSerializer.Deserialize<List<string>>(cachedTodosString);
+                IsCached = true;
+            }
+            else
+            {
+                // loading from code (in real-time from database)
+                // then saving to the redis cache 
+                myTodos = todos;
+                IsCached = false;
+                cachedTodosString = JsonSerializer.Serialize<List<string>>(todos);
+                var expiryOptions = new DistributedCacheEntryOptions()
+                {
+	                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60),
+	                SlidingExpiration = TimeSpan.FromSeconds(30)
+                };
+                await _distributedCache.SetStringAsync("_todos", cachedTodosString, expiryOptions);
+            }
+            return Ok(new { IsCached, myTodos });
+        }
+    }
+}
 ```
 17. Verificar la instancia de contenedor ya no se encuentra activa
 ```
