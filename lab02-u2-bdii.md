@@ -1,7 +1,7 @@
 # SESION DE LABORATORIO N° 02: Generando un API utilizando una Base de Datos Documental (MongoDB)
 
 ## OBJETIVOS
-  * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
+  * Comprender el funcionamiento de un motor de base de datos no relacional del tipo documental a través de su despliegue y uso.
 
 ## REQUERIMIENTOS
   * Conocimientos: 
@@ -62,13 +62,16 @@ db.Books.find({}).pretty()
 
 ### PARTE II: Creación del API
 
-10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+10. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando:
 ```
-SELECT BANNER FROM v$version;
+dotnet new webapi -o BooksApi
 ```
-11. Para salir escriba el comando exit.
-
-12. En una pestaña nueva del navegador de internet acceder a la siguiente dirección:https://localhost:5500/em e Iniciar sesión con los siguientes datos
+11. Acceder a la carpeta recien creada y adicionar la libreria de Mongo para Net.
+```
+cd ./BooksApi/
+dotnet add package MongoDB.Driver
+```
+12. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro de la carpeta Controllers generar un archivo TodosController.cs e introducir el siguiente código:
 ```
 Usuario: sys
 Contraseña: Upt.2022
