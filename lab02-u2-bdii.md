@@ -1,4 +1,4 @@
-# SESION DE LABORATORIO N° 02: Instalación de una Instancia de Oracle Database
+# SESION DE LABORATORIO N° 02: Generando un API utilizando una Base de Datos Documental (MongoDB)
 
 ## OBJETIVOS
   * Comprender el funcionamiento de un motor de base de datos relacional a través de su instalaciónn y configuración.
