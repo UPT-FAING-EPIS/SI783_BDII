@@ -53,8 +53,7 @@ db.createCollection('Books')
 ```
 8. Insertar algunos datos de pruebas en la colección Books:
 ```
-db.Books.insertMany([{'Name':'Design Patterns','Price':54.93,'Category':'Computers','Author':'Ralph Johnson'}, {'Name':'Clean
- Code','Price':43.15,'Category':'Computers','Author':'Robert C. Martin'}])
+db.Books.insertMany([{'Name':'Design Patterns','Price':54.93,'Category':'Computers','Author':'Ralph Johnson'}, {'Name':'Clean Code','Price':43.15,'Category':'Computers','Author':'Robert C. Martin'}])
 ```
 9. Verificar los datos ingresados mediante el siguiente comando:
 ```
