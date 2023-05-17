@@ -21,6 +21,9 @@
   * Clonar el repositorio mediante git para tener los recursos necesaarios
 
 ## DESARROLLO
+
+### PARTE I: Configuración de la base de datos
+
 1. Iniciar la aplicación Docker Desktop:
 2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
 3. Ejecutar el siguiente comando para iniciar una nueva instancia de una base de datos Mongo
@@ -48,14 +51,18 @@ use BookstoreDb
 ```
 db.createCollection('Books')
 ```
-8. Verificar la instancia de contenedor este en ejecución
+8. Insertar algunos datos de pruebas en la colección Books:
 ```
-docker ps
+db.Books.insertMany([{'Name':'Design Patterns','Price':54.93,'Category':'Computers','Author':'Ralph Johnson'}, {'Name':'Clean
+ Code','Price':43.15,'Category':'Computers','Author':'Robert C. Martin'}])
 ```
-9. Esperar unos 45 segundos y ejecutar el siguiente comando:
+9. Verificar los datos ingresados mediante el siguiente comando:
 ```
-docker exec -it ORACLE01 sqlplus / as sysdba
+db.Books.find({}).pretty()
 ```
+
+### PARTE II: Creación del API
+
 10. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
 SELECT BANNER FROM v$version;
