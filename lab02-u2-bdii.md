@@ -15,8 +15,7 @@
     - Windows 10 64bit: Pro, Enterprise o Education (1607 Anniversary Update, Build 14393 o Superior)
     - Docker Desktop 
     - Powershell versión 7.x
-    - Cuenta de Oracle (generarla aqui https://container-registry.oracle.com/)
-    - SQL Developer (https://www.oracle.com/database/sqldeveloper/technologies/download/)
+    - .Net 6
 
 ## CONSIDERACIONES INICIALES
   * Clonar el repositorio mediante git para tener los recursos necesaarios
@@ -24,25 +23,30 @@
 ## DESARROLLO
 1. Iniciar la aplicación Docker Desktop:
 2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-3. Ejecutar el siguiente comando para verificar la versión de Docker
+3. Ejecutar el siguiente comando para iniciar una nueva instancia de una base de datos Mongo
 ```
-docker version
+docker run --name mongodb -d -p 27017:27017 mongo
 ```
-4. Iniciar sesion en el registro de contenedores de Oracle, colocar su usuario(correo) y contraseña cuando se lo pida. 
+4. Verificar sus ejecución y nombre con el siguiente comando. 
 ```
-docker login container-registry.oracle.com
+docker ps
 ```
-5. Descargar la imagen de docker de Microsoft SQL Server
+deberá visualizar algo similar a:
 ```
-docker pull container-registry.oracle.com/database/express:latest
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                      NAMES
+f293cca76b24   mongo     "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:27017->27017/tcp   mongodb
 ```
-6. Verificar la imagen de docker descargada
+5. Conectarse al gestor de base de datos mediante el siguiente comando:
 ```
-docker images
+docker exec -it mongodb mongosh
 ```
-7. Ejecutar e iniciar una instancia de contenedor de la imagen previamente descargada
+6. Crear la base de datos BookstoreDB, con el siguiente comando:
 ```
-docker run --name ORACLE01 -d -p 1521:1521 -p 5500:5500 -e ORACLE_PWD='upt.2023' container-registry.oracle.com/database/express
+use BookstoreDb
+```
+7. Crear la colección Books, dentro de la base de datos:
+```
+db.createCollection('Books')
 ```
 8. Verificar la instancia de contenedor este en ejecución
 ```
