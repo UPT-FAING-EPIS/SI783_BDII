@@ -62,16 +62,16 @@ db.Books.find({}).pretty()
 
 ### PARTE II: Creación del API
 
-10. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando:
+1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando:
 ```
 dotnet new webapi -o BooksApi
 ```
-11. Acceder a la carpeta recien creada y adicionar la libreria de Mongo para Net.
+2. Acceder a la carpeta recien creada y adicionar la libreria de Mongo para Net.
 ```
 cd ./BooksApi/
 dotnet add package MongoDB.Driver
 ```
-12. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro de la carpeta Controllers generar un archivo BookstoreDatabaseSettings.cs e introducir el siguiente código:
+3. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro del proyecto generar un archivo BookstoreDatabaseSettings.cs e introducir el siguiente código:
 ```C#
 namespace BooksApi.Models
 {
@@ -90,7 +90,7 @@ namespace BooksApi.Models
     }
 }
 ```
-14. Modificar el archivo appsettings.json y añadir:
+4. Modificar el archivo appsettings.json y añadir:
 ```JSON
 {
   "BookstoreDatabaseSettings": {
@@ -113,7 +113,7 @@ namespace BooksApi.Models
   }
 }
 ```
-16. Crear el archivo BookService.cs
+5. Crear el archivo BookService.cs con el siguiente código:
 ```C#
 using BooksApi.Models;
 using MongoDB.Driver;
@@ -157,7 +157,7 @@ namespace BooksApi.Services
     }
 }
 ```
-13. En el archivo Program.cs adicionar el siguiente código.
+6. En el archivo Program.cs adicionar el siguiente código.
 ```C#
     services.Configure<BookstoreDatabaseSettings>(
         Configuration.GetSection(nameof(BookstoreDatabaseSettings)));
@@ -167,7 +167,7 @@ namespace BooksApi.Services
 
     services.AddSingleton<BookService>();
 ```
-14. Adicionalmente crear el archivo BooksController.cs en la carpeta Controllers con el siguiente código:
+7. Adicionalmente crear el archivo BooksController.cs en la carpeta Controllers con el siguiente código:
 ```C#
 using BooksApi.Models;
 using BooksApi.Services;
@@ -208,7 +208,6 @@ namespace BooksApi.Controllers
         public ActionResult<Book> Create(Book book)
         {
             _bookService.Create(book);
-
             return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
         }
 
@@ -216,14 +215,8 @@ namespace BooksApi.Controllers
         public IActionResult Update(string id, Book bookIn)
         {
             var book = _bookService.Get(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
+            if (book == null) return NotFound();
             _bookService.Update(id, bookIn);
-
             return NoContent();
         }
 
@@ -231,20 +224,18 @@ namespace BooksApi.Controllers
         public IActionResult Delete(string id)
         {
             var book = _bookService.Get(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
+            if (book == null) return NotFound();
             _bookService.Remove(id);
-
             return NoContent();
         }
     }
 }
 ```
-15. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+8. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
+```
+dotnet run
+```
+9. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX/swagger (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz de Swagger, en el metodo Create, ingresar los siguientes datos y probar:
 ```JSON
 {
   "id":"{ID}",
@@ -257,5 +248,5 @@ namespace BooksApi.Controllers
 
 ---
 ## Actividades Encargadas
-1. Genere un nuevo contenedor y cree un espacio de tablas con las siguientes características.
+1. Genere una base de datos en Mongo Atlas (https://www.mongodb.com/atlas/database) y modifique la cadena de conexión de la aplicaciòn para utilizar esta base de datos.
 
