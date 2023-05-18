@@ -71,47 +71,191 @@ dotnet new webapi -o BooksApi
 cd ./BooksApi/
 dotnet add package MongoDB.Driver
 ```
-12. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro de la carpeta Controllers generar un archivo TodosController.cs e introducir el siguiente código:
-```
-Usuario: sys
-Contraseña: Upt.2022
-```
-13. Capture la pantalla de su servidor como parte de la actividad del laboratorio, anote el nombre de la instancia (SID).
+12. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro de la carpeta Controllers generar un archivo BookstoreDatabaseSettings.cs e introducir el siguiente código:
+```C#
+namespace BooksApi.Models
+{
+    public class BookstoreDatabaseSettings : IBookstoreDatabaseSettings
+    {
+        public string BooksCollectionName { get; set; }
+        public string ConnectionString { get; set; }
+        public string DatabaseName { get; set; }
+    }
 
-14. Iniciar el aplicativo Oracle SQL Developer, crear una nueva conexión con los siguientes parámetros:.
+    public interface IBookstoreDatabaseSettings
+    {
+        string BooksCollectionName { get; set; }
+        string ConnectionString { get; set; }
+        string DatabaseName { get; set; }
+    }
+}
 ```
-Name : OracleConexion
-Usuario: sys
-Contraseña: Upt.2022
-Rol: SYSDBA
-Nombre del Host: localhost
-Puerto: 1521
-SID: .......
+14. Modificar el archivo appsettings.json y añadir:
+```JSON
+{
+  "BookstoreDatabaseSettings": {
+    "BooksCollectionName": "Books",
+    "ConnectionString": "mongodb://localhost:27017",
+    "DatabaseName": "BookstoreDb"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "Debug": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    },
+    "Console": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    }
+  }
+}
+```
+16. Crear el archivo BookService.cs
+```C#
+using BooksApi.Models;
+using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace BooksApi.Services
+{
+    public class BookService
+    {
+        private readonly IMongoCollection<Book> _books;
+
+        public BookService(IBookstoreDatabaseSettings settings)
+        {
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+
+            _books = database.GetCollection<Book>(settings.BooksCollectionName);
+        }
+
+        public List<Book> Get() =>
+            _books.Find(book => true).ToList();
+
+        public Book Get(string id) =>
+            _books.Find<Book>(book => book.Id == id).FirstOrDefault();
+
+        public Book Create(Book book)
+        {
+            _books.InsertOne(book);
+            return book;
+        }
+
+        public void Update(string id, Book bookIn) =>
+            _books.ReplaceOne(book => book.Id == id, bookIn);
+
+        public void Remove(Book bookIn) =>
+            _books.DeleteOne(book => book.Id == bookIn.Id);
+
+        public void Remove(string id) => 
+            _books.DeleteOne(book => book.Id == id);
+    }
+}
+```
+13. En el archivo Program.cs adicionar el siguiente código.
+```C#
+    services.Configure<BookstoreDatabaseSettings>(
+        Configuration.GetSection(nameof(BookstoreDatabaseSettings)));
+
+    services.AddSingleton<IBookstoreDatabaseSettings>(sp =>
+        sp.GetRequiredService<IOptions<BookstoreDatabaseSettings>>().Value);
+
+    services.AddSingleton<BookService>();
+```
+14. Adicionalmente crear el archivo BooksController.cs en la carpeta Controllers con el siguiente código:
+```C#
+using BooksApi.Models;
+using BooksApi.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+
+namespace BooksApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BooksController : ControllerBase
+    {
+        private readonly BookService _bookService;
+
+        public BooksController(BookService bookService)
+        {
+            _bookService = bookService;
+        }
+
+        [HttpGet]
+        public ActionResult<List<Book>> Get() =>
+            _bookService.Get();
+
+        [HttpGet("{id:length(24)}", Name = "GetBook")]
+        public ActionResult<Book> Get(string id)
+        {
+            var book = _bookService.Get(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return book;
+        }
+
+        [HttpPost]
+        public ActionResult<Book> Create(Book book)
+        {
+            _bookService.Create(book);
+
+            return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
+        }
+
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Update(string id, Book bookIn)
+        {
+            var book = _bookService.Get(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            _bookService.Update(id, bookIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var book = _bookService.Get(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            _bookService.Remove(id);
+
+            return NoContent();
+        }
+    }
+}
 ```
 15. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
+```JSON
+{
+  "id":"{ID}",
+  "bookName":"Clean Code",
+  "price":43.15,
+  "category":"Computers",
+  "author":"Robert C. Martin"
+}
 ```
-SELECT * FROM ALL_TABLES
-```
-15. Iniciar una nueva consulta, escribir (reemplazando con su nombre y Apellido) y ejecutar lo siguiente:
-```
-CREATE SMALLFILE TABLESPACE 'nombreApellido' DATAFILE '/opt/oracle/oradata/XE/cursos.dbf' SIZE 50M AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO DEFAULT NOCOMPRESS
-```
-16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
-```
-docker rm -f SQLLNX01
-```
-17. Verificar la instancia de contenedor ya no se encuentra activa
-```
-docker ps
-```
+
 ---
 ## Actividades Encargadas
 1. Genere un nuevo contenedor y cree un espacio de tablas con las siguientes características.
 
-Nombre : FINANCIERA:
-
-- DATOS (dbf) : Tamaño Inicial : 50MB, Incremento: 10MB, Ilimitado
-- INDICES (dbf) Tamaño Inicial : 100MB, Incremento: 20MB, Maximo: 1GB
-- HISTORICO (dbf) Tamaño Inicial : 100MB, Incremento: 50MB, Ilimitado
-
-¿Cuál sería el script SQL que generaría esta base de datos?
