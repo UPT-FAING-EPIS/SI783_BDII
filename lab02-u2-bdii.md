@@ -151,11 +151,8 @@ public class BookService
             bookStoreDatabaseSettings.Value.BooksCollectionName);
     }
 
-    public List<Book> Get() {
-        return _booksCollection.Find(_ => true).ToList() ;
-    }
-    // public async Task<List<Book>> GetAsync() =>
-    //     await _booksCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Book>> GetAsync() =>
+        await _booksCollection.Find(_ => true).ToListAsync();
 
     public async Task<Book?> GetAsync(string id) =>
         await _booksCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
@@ -193,8 +190,8 @@ public class BooksController : ControllerBase
         _booksService = booksService;
 
     [HttpGet]
-    public List<Book> Get() {
-        return _booksService.Get();
+    public async Task<List<Book>> Get() {
+        return await _booksService.GetAsync();
     }
     
     [HttpGet("{id:length(24)}")]
@@ -240,7 +237,7 @@ dotnet run
 9. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX/swagger (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz de Swagger, en el metodo Create, ingresar los siguientes datos y probar:
 ```JSON
 {
-  "id":"{ID}",
+  "id":"61a6058e6c43f32854e51f52",
   "bookName":"Clean Code",
   "price":43.15,
   "category":"Computers",
