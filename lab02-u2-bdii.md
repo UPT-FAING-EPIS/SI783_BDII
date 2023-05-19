@@ -113,10 +113,10 @@ namespace BooksApi.Models
 4. Modificar el archivo appsettings.json para que apunte als BD de datos y añadir:
 ```JSON
 {
-  "BookstoreDatabaseSettings": {
-    "BooksCollectionName": "Books",
-    "ConnectionString": "mongodb://localhost:27017",
-    "DatabaseName": "BookstoreDb"
+  "BookStoreDatabase": {
+    "ConnectionString": "mongodb://127.0.0.1:27017",
+    "DatabaseName": "BookstoreDb",
+    "BooksCollectionName": "Books"
   },
   "Logging": {
     "IncludeScopes": false,
@@ -136,118 +136,108 @@ namespace BooksApi.Models
 5. Crear el archivo BookService.cs con el siguiente código:
 ```C#
 using BooksApi.Models;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace BooksApi.Services
+namespace BooksApi.Services;
+
+public class BookService
 {
-    public class BookService
+    private readonly IMongoCollection<Book> _booksCollection;
+
+    public BookService(
+        IOptions<BookStoreDatabaseSettings> bookStoreDatabaseSettings)
     {
-        private readonly IMongoCollection<Book> _books;
+        var mongoClient = new MongoClient(
+            bookStoreDatabaseSettings.Value.ConnectionString);
 
-        public BookService(IBookstoreDatabaseSettings settings)
-        {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+        var mongoDatabase = mongoClient.GetDatabase(
+            bookStoreDatabaseSettings.Value.DatabaseName);
 
-            _books = database.GetCollection<Book>(settings.BooksCollectionName);
-        }
-
-        public List<Book> Get() =>
-            _books.Find(book => true).ToList();
-
-        public Book Get(string id) =>
-            _books.Find<Book>(book => book.Id == id).FirstOrDefault();
-
-        public Book Create(Book book)
-        {
-            _books.InsertOne(book);
-            return book;
-        }
-
-        public void Update(string id, Book bookIn) =>
-            _books.ReplaceOne(book => book.Id == id, bookIn);
-
-        public void Remove(Book bookIn) =>
-            _books.DeleteOne(book => book.Id == bookIn.Id);
-
-        public void Remove(string id) => 
-            _books.DeleteOne(book => book.Id == id);
+        _booksCollection = mongoDatabase.GetCollection<Book>(
+            bookStoreDatabaseSettings.Value.BooksCollectionName);
     }
+
+    public List<Book> Get() {
+        return _booksCollection.Find(_ => true).ToList() ;
+    }
+    // public async Task<List<Book>> GetAsync() =>
+    //     await _booksCollection.Find(_ => true).ToListAsync();
+
+    public async Task<Book?> GetAsync(string id) =>
+        await _booksCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+    public async Task CreateAsync(Book newBook) =>
+        await _booksCollection.InsertOneAsync(newBook);
+
+    public async Task UpdateAsync(string id, Book updatedBook) =>
+        await _booksCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+
+    public async Task RemoveAsync(string id) =>
+        await _booksCollection.DeleteOneAsync(x => x.Id == id);
 }
 ```
 6. En el archivo Program.cs adicionar el siguiente código.
 ```C#
-    services.Configure<BookstoreDatabaseSettings>(
-        Configuration.GetSection(nameof(BookstoreDatabaseSettings)));
-
-    services.AddSingleton<IBookstoreDatabaseSettings>(sp =>
-        sp.GetRequiredService<IOptions<BookstoreDatabaseSettings>>().Value);
-
-    services.AddSingleton<BookService>();
+         builder.Services.Configure<BookStoreDatabaseSettings>(
+             builder.Configuration.GetSection("BookStoreDatabase"));
+         builder.Services.AddSingleton<BookService>();
 ```
 7. Adicionalmente crear el archivo BooksController.cs en la carpeta Controllers con el siguiente código:
 ```C#
 using BooksApi.Models;
 using BooksApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
-namespace BooksApi.Controllers
+namespace BookStoreApi.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class BooksController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BooksController : ControllerBase
+    private readonly BookService _booksService;
+
+    public BooksController(BookService booksService) =>
+        _booksService = booksService;
+
+    [HttpGet]
+    public List<Book> Get() {
+        return _booksService.Get();
+    }
+    
+    [HttpGet("{id:length(24)}")]
+    public async Task<ActionResult<Book>> Get(string id)
     {
-        private readonly BookService _bookService;
+        var book = await _booksService.GetAsync(id);
+        if (book is null) return NotFound();
+        return book;
+    }
 
-        public BooksController(BookService bookService)
-        {
-            _bookService = bookService;
-        }
+    [HttpPost]
+    public async Task<IActionResult> Post(Book newBook)
+    {
+        await _booksService.CreateAsync(newBook);
+        return CreatedAtAction(nameof(Get), new { id = newBook.Id }, newBook);
+    }
 
-        [HttpGet]
-        public ActionResult<List<Book>> Get() =>
-            _bookService.Get();
+    [HttpPut("{id:length(24)}")]
+    public async Task<IActionResult> Update(string id, Book updatedBook)
+    {
+        var book = await _booksService.GetAsync(id);
 
-        [HttpGet("{id:length(24)}", Name = "GetBook")]
-        public ActionResult<Book> Get(string id)
-        {
-            var book = _bookService.Get(id);
+        if (book is null) return NotFound();
+        updatedBook.Id = book.Id;
+        await _booksService.UpdateAsync(id, updatedBook);
+        return NoContent();
+    }
 
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return book;
-        }
-
-        [HttpPost]
-        public ActionResult<Book> Create(Book book)
-        {
-            _bookService.Create(book);
-            return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
-        }
-
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Book bookIn)
-        {
-            var book = _bookService.Get(id);
-            if (book == null) return NotFound();
-            _bookService.Update(id, bookIn);
-            return NoContent();
-        }
-
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
-        {
-            var book = _bookService.Get(id);
-            if (book == null) return NotFound();
-            _bookService.Remove(id);
-            return NoContent();
-        }
+    [HttpDelete("{id:length(24)}")]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var book = await _booksService.GetAsync(id);
+        if (book is null) return NotFound();
+        await _booksService.RemoveAsync(id);
+        return NoContent();
     }
 }
 ```
