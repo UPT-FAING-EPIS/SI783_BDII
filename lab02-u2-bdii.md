@@ -71,7 +71,27 @@ dotnet new webapi -o BooksApi
 cd ./BooksApi/
 dotnet add package MongoDB.Driver
 ```
-3. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro del proyecto generar un archivo BookstoreDatabaseSettings.cs e introducir el siguiente código:
+3. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro del proyecto añadir el archivo Book.cs el cual tendrña la clase entidad, con el siguiente código
+```C#
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace BooksApi.Models
+{
+    public class Book
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        [BsonElement("Name")]
+        public string BookName { get; set; }
+        public decimal Price { get; set; }
+        public string Category { get; set; }
+        public string Author { get; set; }
+    }
+}
+```
+5. Ahora proceder a añadir la clase de configuración con el nombre de archivo BookstoreDatabaseSettings.cs e introducir el siguiente código:
 ```C#
 namespace BooksApi.Models
 {
@@ -90,7 +110,7 @@ namespace BooksApi.Models
     }
 }
 ```
-4. Modificar el archivo appsettings.json y añadir:
+4. Modificar el archivo appsettings.json para que apunte als BD de datos y añadir:
 ```JSON
 {
   "BookstoreDatabaseSettings": {
