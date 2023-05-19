@@ -91,11 +91,11 @@ namespace BooksApi.Models
     }
 }
 ```
-5. Ahora proceder a añadir la clase de configuración con el nombre de archivo BookstoreDatabaseSettings.cs e introducir el siguiente código:
+5. Ahora proceder a añadir la clase de configuración con el nombre de archivo BookStoreDatabaseSettings.cs e introducir el siguiente código:
 ```C#
 namespace BooksApi.Models
 {
-    public class BookstoreDatabaseSettings
+    public class BookStoreDatabaseSettings
     {
         public string BooksCollectionName { get; set; }
         public string ConnectionString { get; set; }
