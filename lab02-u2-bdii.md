@@ -172,9 +172,8 @@ public class BookService
 ```
 6. En el archivo Program.cs adicionar el siguiente código.
 ```C#
-         builder.Services.Configure<BookStoreDatabaseSettings>(
-             builder.Configuration.GetSection("BookStoreDatabase"));
-         builder.Services.AddSingleton<BookService>();
+builder.Services.Configure<BookStoreDatabaseSettings>(builder.Configuration.GetSection("BookStoreDatabase"));
+builder.Services.AddSingleton<BookService>();
 ```
 7. Adicionalmente crear el archivo BooksController.cs en la carpeta Controllers con el siguiente código:
 ```C#
