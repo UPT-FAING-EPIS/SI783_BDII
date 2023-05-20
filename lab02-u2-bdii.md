@@ -103,28 +103,13 @@ namespace BooksApi.Models
     }
 }
 ```
-4. Modificar el archivo appsettings.json para que apunte als BD de datos y añadir:
+4. Modificar el archivo appsettings.json para que apunte a la base de datos local de datos, añadir:
 ```JSON
-{
   "BookStoreDatabase": {
     "ConnectionString": "mongodb://127.0.0.1:27017",
     "DatabaseName": "BookstoreDb",
     "BooksCollectionName": "Books"
   },
-  "Logging": {
-    "IncludeScopes": false,
-    "Debug": {
-      "LogLevel": {
-        "Default": "Warning"
-      }
-    },
-    "Console": {
-      "LogLevel": {
-        "Default": "Warning"
-      }
-    }
-  }
-}
 ```
 5. Crear el archivo BookService.cs con el siguiente código:
 ```C#
@@ -169,29 +154,13 @@ public class BookService
 ```
 6. En el archivo Program.cs adicionar el siguiente código.
 ```C#
+//Al inicio
 using BooksApi.Models;
 using BooksApi.Services;
-
-var builder = WebApplication.CreateBuilder(args);
-
+...
 // Add services to the container.
 builder.Services.Configure<BookStoreDatabaseSettings>(builder.Configuration.GetSection("BookStoreDatabase"));
 builder.Services.AddSingleton<BookService>();
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-var app = builder.Build();
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-app.Run();
 ```
 7. Adicionalmente crear el archivo BooksController.cs en la carpeta Controllers con el siguiente código:
 ```C#
