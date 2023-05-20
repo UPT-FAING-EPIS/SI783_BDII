@@ -228,7 +228,7 @@ public async Task<IActionResult> ClearCache(string key)
   return Ok(new { Message = $"cleared cache for key -{key}" });
 }
 ```
-2. En el CLI de Redis generar un nuevo objeto clave valor con el nombre llave y luego volver al navegador e introduzca la siguiente url http://localhost:5162/Todos/clear-cache/llave. Verificar que se haya eliminado los datos correspondientes. Tambien puede probar con el objeto generado en el get con nombre '_todos'.
+2. En un navegador de internet ingresar la url http://localhost:XXXX/Todos (reemplazar XXXX puerto definido por .Net), actualizar para que se genere en la base de datos cache y luego introduzca la siguiente url http://localhost:XXXX/Todos/clear-cache/_todos. Verificar que se haya eliminado los datos correspondientes utilizando la primera URL.
 
 ---
 ## Actividades Encargadas
