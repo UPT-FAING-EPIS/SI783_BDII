@@ -28,7 +28,7 @@
 2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
 3. Ejecutar el siguiente comando para iniciar una nueva instancia de una base de datos Neo4j
 ```
-docker run --name neo4j-db -d -p 7474:7474 -p 7687:7687 -v neo4jvol:/data neo4j
+docker run --name neo4j-db -d -p 7474:7474 -p 7687:7687 -v neo4jvol:/data -e NEO4J_AUTH=neo4j/upt.2023 neo4j
 ```
 4. Verificar sus ejecución y nombre con el siguiente comando. 
 ```
