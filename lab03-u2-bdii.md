@@ -26,9 +26,9 @@
 
 1. Iniciar la aplicación Docker Desktop:
 2. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-3. Ejecutar el siguiente comando para iniciar una nueva instancia de una base de datos Mongo
+3. Ejecutar el siguiente comando para iniciar una nueva instancia de una base de datos Neo4j
 ```
-docker run --name mongodb -d -p 27017:27017 mongo
+docker run --name neo4j-db -d -p 7474:7474 -p 7687:7687 -v neo4jvol:/data neo4j
 ```
 4. Verificar sus ejecución y nombre con el siguiente comando. 
 ```
@@ -36,8 +36,8 @@ docker ps
 ```
 deberá visualizar algo similar a:
 ```
-CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                      NAMES
-f293cca76b24   mongo     "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:27017->27017/tcp   mongodb
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                             PORTS                                 NAMES
+00055de0745c   neo4j  "tini -g -- /startup…"   33 seconds ago    Up 32 seconds   0.0.0.0:7474->7474/tcp, 7473/tcp, 0.0.0.0:7687->7687/tcp   neo4j-db
 ```
 5. Conectarse al gestor de base de datos mediante el siguiente comando:
 ```
