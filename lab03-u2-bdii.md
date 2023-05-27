@@ -39,7 +39,9 @@ deberá visualizar algo similar a:
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                             PORTS                                 NAMES
 00055de0745c   neo4j  "tini -g -- /startup…"   33 seconds ago    Up 32 seconds   0.0.0.0:7474->7474/tcp, 7473/tcp, 0.0.0.0:7687->7687/tcp   neo4j-db
 ```
-5. Conectarse al gestor de base de datos mediante el siguiente comando:
+5. Abrir un navegador de internet e ingresar la url http://localhost:7474/, ingresar lasa credenciales usuario y clave neo4j:neo4j y cambiar la clave del mismo que servira como cadena de conexión para la realizacion del laboratorio.
+
+7. Conectarse al gestor de base de datos mediante el siguiente comando:
 ```
 docker exec -it mongodb mongosh
 ```
@@ -64,12 +66,47 @@ db.Books.find({}).pretty()
 
 1. Iniciar la aplicación Powershell o Windows Terminal en modo administrador si es que no se tiene iniciada y ejecutar el siguiente comando:
 ```
-dotnet new webapi -o BooksApi
+dotnet new webapi -o App.Neo4j.Api
 ```
 2. Acceder a la carpeta recien creada y adicionar la libreria de Mongo para Net.
 ```
-cd ./BooksApi/
-dotnet add package MongoDB.Driver
+cd ./App.Neo4j.Api/
+dotnet add package Neo4j.Driver
+```
+3. Iniciar Visual Studio Code tomando como base la carpeta generada (App.Neo4j.Api). Dentro del proyecto, en el folder Controllers, añadir el archivo PersonController.cs, con el siguiente código
+```C#
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Neo4j.Driver;
+namespace App.Neo4j.Api.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PersonController : ControllerBase
+    {
+        private readonly IDriver _driver;
+
+        public PersonController()
+        {
+            _driver = GraphDatabase.Driver("bolt://localhost:7687", AuthTokens.Basic("neo4j", "upt.2023"));   
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNode(string name)
+        {
+            var statementText = new StringBuilder();
+            statementText.Append("CREATE (person:Person {name: $name})");
+            var statementParameters = new Dictionary<string, object>
+            {
+                {"name", name }
+            };
+
+            var session = this._driver.AsyncSession();
+            var result = await session.WriteTransactionAsync(tx => tx.RunAsync(statementText.ToString(),  statementParameters));
+            return StatusCode(201, "Node has been created in the database");
+        }        
+    }
+}
 ```
 3. Iniciar Visual Studio Code tomando como base la carpeta generada (BooksApi). Dentro del proyecto añadir el archivo Book.cs el cual tendrña la clase entidad, con el siguiente código
 ```C#
