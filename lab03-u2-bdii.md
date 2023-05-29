@@ -523,21 +523,13 @@ public class MoviesController : Controller
 </body>
 </html>
 ```
-10. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
+9. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
 ```Bash
 dotnet run
 ```
-9. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX/swagger (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz de Swagger, en el metodo Create, ingresar los siguientes datos y probar:
-```JSON
-{
-  "id":"61a6058e6c43f32854e51f52",
-  "bookName":"Clean Code",
-  "price":43.15,
-  "category":"Computers",
-  "author":"Robert C. Martin"
-}
-```
+10. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz ingresar la usqueda de una pelicula "Matrix" por ejemplo.
+![image](https://github.com/UPT-FAING-EPIS/SI783_BDII/assets/10199939/d9f25bde-2c27-404a-a43e-bfcdaea434b1)
 
 ---
 ## Actividades Encargadas
-1. Genere una base de datos en Mongo Atlas (https://www.mongodb.com/atlas/database) y modifique la cadena de conexión de la aplicaciòn para utilizar esta base de datos.
+1. Genere una base de datos en Neo4j y relice un nuevo proyecto API para su consulta.
