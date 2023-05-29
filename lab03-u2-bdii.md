@@ -328,11 +328,7 @@ public class MoviesController : Controller
 }
 ```
 8. Finalmente crear una carpeta wwwroot en donde se debe adicioanr un archivo index.html con el siguiente contenido:
-```html
-dotnet run
-```
-10. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
-```
+```Html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -526,6 +522,10 @@ dotnet run
     });</script>
 </body>
 </html>
+```
+10. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
+```Bash
+dotnet run
 ```
 9. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX/swagger (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz de Swagger, en el metodo Create, ingresar los siguientes datos y probar:
 ```JSON
