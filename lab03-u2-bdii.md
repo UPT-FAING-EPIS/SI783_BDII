@@ -41,7 +41,7 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 ```
 5. Abrir un navegador de internet e ingresar la url http://localhost:7474/, ingresar lasa credenciales usuario y clave neo4j:neo4j y cambiar la clave del mismo que servira como cadena de conexión para la realizacion del laboratorio.
 
-7. Descargar el archivo [a relative link](movies.cypher) si nolo ha descargado en la clonación del proyecto. ejecutar el siguiente comando para copiar el archivo en el contenedor :
+7. Descargar el archivo [movies.sypher](movies.cypher) si nolo ha descargado en la clonación del proyecto. ejecutar el siguiente comando para copiar el archivo en el contenedor :
 ```
 docker cp neo4j-db:movies.cypher /data
 ```
