@@ -41,26 +41,26 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 ```
 5. Abrir un navegador de internet e ingresar la url http://localhost:7474/, ingresar lasa credenciales usuario y clave neo4j:neo4j y cambiar la clave del mismo que servira como cadena de conexión para la realizacion del laboratorio.
 
-7. Conectarse al gestor de base de datos mediante el siguiente comando:
+7. Descargar el archivo [a relative link](movies.cypher) si nolo ha descargado en la clonación del proyecto. ejecutar el siguiente comando para copiar el archivo en el contenedor :
 ```
-docker exec -it mongodb mongosh
+docker cp neo4j-db:movies.cypher /data
 ```
-6. Crear la base de datos BookstoreDB, con el siguiente comando:
+6. Ahora proceder a ejecutar el script del archivo:
 ```
-use BookstoreDb
+docker exec -it neo4j-db cypher-shell -u neo4j -p "upt.2023" -f /data/movies.cypher
 ```
-7. Crear la colección Books, dentro de la base de datos:
+7. Ahora nos conectarse a la base de datos:
 ```
-db.createCollection('Books')
+docker exec -it neo4j-db cypher-shell -u neo4j -p "upt.2023"
 ```
-8. Insertar algunos datos de pruebas en la colección Books:
+8. y realizar una consulta para probar:
 ```
-db.Books.insertMany([{'Name':'Design Patterns','Price':54.93,'Category':'Computers','Author':'Ralph Johnson'}, {'Name':'Clean Code','Price':43.15,'Category':'Computers','Author':'Robert C. Martin'}])
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WHERE a.name = 'Tom Hanks'
+RETURN  m.title, m.released, date().year  - m.released as yearsAgoReleased, m.released  - a.born AS `age of Tom`
+ORDER BY yearsAgoReleased
 ```
-9. Verificar los datos ingresados mediante el siguiente comando:
-```
-db.Books.find({}).pretty()
-```
+9. Verificar el resultado y para salir excribir `:exit`.
 
 ### PARTE II: Creación del API
 
