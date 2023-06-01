@@ -101,6 +101,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Neo4j.Api.Models;
+using Microsoft.Extensions.Configuration;
 using Neo4j.Driver;
 
 namespace App.Neo4j.Api.Repositories;
@@ -116,10 +117,11 @@ public interface IMovieRepository
 public class MovieRepository : IMovieRepository
 {
     private readonly IDriver _driver;
-
-    public MovieRepository(IDriver driver)
+    private readonly IConfiguration _configuration;
+    public MovieRepository(IDriver driver, IConfiguration configuration)
     {
         _driver = driver;
+        _configuration = configuration;
     }
 
     public async Task<Movie> FindByTitle(string title)
@@ -239,18 +241,13 @@ public class MovieRepository : IMovieRepository
             ).ToList();
     }
 
-    private static void WithDatabase(SessionConfigBuilder sessionConfigBuilder)
+    private void WithDatabase(SessionConfigBuilder sessionConfigBuilder)
     {
         var neo4jVersion = Environment.GetEnvironmentVariable("NEO4J_VERSION") ?? "";
         if (!neo4jVersion.StartsWith("4"))
             return;
-
-        sessionConfigBuilder.WithDatabase(Database());
-    }
-
-    private static string Database()
-    {
-        return Environment.GetEnvironmentVariable("NEO4J_DATABASE") ?? "movies";
+        var dbname = _configuration.GetSection("neo4jdb")["NEO4J_USER"] ?? "movies";
+        sessionConfigBuilder.WithDatabase(dbname);
     }
 }
 ```
