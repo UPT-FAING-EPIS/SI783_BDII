@@ -251,7 +251,16 @@ public class MovieRepository : IMovieRepository
     }
 }
 ```
-6. En el archivo Program.cs adicionar el siguiente código.
+6. En el archivo appsettings.json adicionar una sección para los parametros de la base de datos:
+```JSon
+"neo4jdb": {
+    "NEO4J_URI": "bolt://localhost:7687",
+    "NEO4J_USER": "neo4j",
+    "NEO4J_PASSWORD": "upt.2023",
+    "NEO4J_DATABASE": "neo4j"
+  },
+```
+7. En el archivo Program.cs adicionar el siguiente código.
 ```C#
 //Al inicio
 using System;
@@ -264,10 +273,10 @@ using Microsoft.Extensions.Hosting;
 // Add services to the container.
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddSingleton(GraphDatabase.Driver(
-    Environment.GetEnvironmentVariable("NEO4J_URI") ?? "neo4j+s://demo.neo4jlabs.com",
+    builder.Configuration.GetSection("neo4jdb")["NEO4J_URI"] ?? "neo4j+s://demo.neo4jlabs.com",
     AuthTokens.Basic(
-        Environment.GetEnvironmentVariable("NEO4J_USER") ?? "movies",
-        Environment.GetEnvironmentVariable("NEO4J_PASSWORD") ?? "movies"
+        builder.Configuration.GetSection("neo4jdb")["NEO4J_USER"] ?? "movies",
+        builder.Configuration.GetSection("neo4jdb")["NEO4J_PASSWORD"] ?? "movies"
     )
 ));
 ...
@@ -275,7 +284,7 @@ builder.Services.AddSingleton(GraphDatabase.Driver(
 app.UseDefaultFiles();
 app.UseStaticFiles();
 ```
-7. Adicionalmente crear el archivo MoviesController.cs en la carpeta Controllers con el siguiente código:
+8. Adicionalmente crear el archivo MoviesController.cs en la carpeta Controllers con el siguiente código:
 ```C#
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -324,7 +333,7 @@ public class MoviesController : Controller
     }  
 }
 ```
-8. Finalmente crear una carpeta wwwroot en donde se debe adicioanr un archivo index.html con el siguiente contenido:
+9. Finalmente crear una carpeta wwwroot en donde se debe adicioanr un archivo index.html con el siguiente contenido:
 ```Html
 <!DOCTYPE html>
 <html lang="en">
@@ -520,13 +529,13 @@ public class MoviesController : Controller
 </body>
 </html>
 ```
-9. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
+10. Iniciar un terminal en VS Code (CTRL+Ñ) o volver al terminal anteriomente abierto y ejecutar la aplicación con el comando:
 ```Bash
 dotnet run
 ```
-10. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz ingresar la usqueda de una pelicula "Matrix" por ejemplo.
+10. Iniciar un navegador de internet e introducir la url http://localhost:XXXXX (donde XXXXX es el puerto donde esta eejcutandose la aplicación), una vez cargada la interfaz ingresar la búsqueda de una pelicula "Matrix" por ejemplo.
 ![image](https://github.com/UPT-FAING-EPIS/SI783_BDII/assets/10199939/d9f25bde-2c27-404a-a43e-bfcdaea434b1)
 
 ---
 ## Actividades Encargadas
-1. Genere una base de datos en Neo4j y relice un nuevo proyecto API para su consulta.
+1. Genere un nuevo proyecto web api utilizando el servicio Saas para Neo4j (https://neo4j.com/cloud/platform/aura-graph-database/).
