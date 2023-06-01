@@ -58,7 +58,7 @@ docker exec -it neo4j-db cypher-shell -u neo4j -p "upt.2023"
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
 WHERE a.name = 'Tom Hanks'
 RETURN  m.title, m.released, date().year  - m.released as yearsAgoReleased, m.released  - a.born AS `age of Tom`
-ORDER BY yearsAgoReleased
+ORDER BY yearsAgoReleased;
 ```
 9. Verificar el resultado y para salir excribir `:exit`.
 
