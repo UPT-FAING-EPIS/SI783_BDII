@@ -43,7 +43,7 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS       
 
 7. Descargar el archivo [movies.cypher](movies.cypher) si nolo ha descargado en la clonación del proyecto. ejecutar el siguiente comando para copiar el archivo en el contenedor :
 ```
-docker cp neo4j-db:movies.cypher /data
+docker cp movies.cypher neo4j-db:/data
 ```
 6. Ahora proceder a ejecutar el script del archivo:
 ```
