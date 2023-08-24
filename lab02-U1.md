@@ -69,7 +69,7 @@ Contraseña: Upt.2022
 ```
 Name : OracleConexion
 Usuario: sys
-Contraseña: Upt.2022
+Contraseña: upt.2023
 Rol: SYSDBA
 Nombre del Host: localhost
 Puerto: 1521
