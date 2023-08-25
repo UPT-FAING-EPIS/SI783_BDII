@@ -5,7 +5,7 @@
 
 ## REQUERIMIENTOS
   * Conocimientos: 
-    - Conocimientos básicos de administración de base de datos Microsoft SQL Server.
+    - Conocimientos básicos de administración de base de datos Oracle Database.
     - Conocimientos básicos de SQL.
   * Hardware:
     - Virtualization activada en el BIOS..
@@ -16,7 +16,8 @@
     - Docker Desktop 
     - Powershell versión 7.x
     - Cuenta de Oracle (generarla aqui https://container-registry.oracle.com/)
-    - SQL Developer (https://www.oracle.com/database/sqldeveloper/technologies/download/)
+    - Oracle SQLcl (https://www.oracle.com/pe/database/sqldeveloper/technologies/sqlcl/)
+    - Gestores de Paquetes Windows: Winget o Chocolatey o Scoop
 
 ## CONSIDERACIONES INICIALES
   * Clonar el repositorio mediante git para tener los recursos necesaarios
@@ -61,23 +62,17 @@ SELECT BANNER FROM v$version;
 12. En una pestaña nueva del navegador de internet acceder a la siguiente dirección:https://localhost:5500/em e Iniciar sesión con los siguientes datos
 ```
 Usuario: sys
-Contraseña: Upt.2022
+Contraseña: Upt.2023
 ```
 13. Capture la pantalla de su servidor como parte de la actividad del laboratorio, anote el nombre de la instancia (SID).
 
-14. Iniciar el aplicativo Oracle SQL Developer, crear una nueva conexión con los siguientes parámetros:.
-```
-Name : OracleConexion
-Usuario: sys
-Contraseña: upt.2023
-Rol: SYSDBA
-Nombre del Host: localhost
-Puerto: 1521
-SID: .......
+14. En el terminal, utilizar `sql` (sino se encuentra instalado puede ejecutar: `scoop install sqlcl`) para consultar todas las tablas existentes, para ejecutar lo siguiente:
+```Bash
+echo 'SELECT * FROM ALL_TABLES' | sql sys/upt.2023@localhost:1521/XE
 ```
 15. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
-SELECT * FROM ALL_TABLES
+sql sys/upt.2023@localhost:1521/XE @lab_script_01.sql
 ```
 15. Iniciar una nueva consulta, escribir (reemplazando con su nombre y Apellido) y ejecutar lo siguiente:
 ```
