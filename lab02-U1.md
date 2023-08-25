@@ -74,11 +74,8 @@ echo 'SELECT TABLE_NAME, TABLESPACE_NAME FROM ALL_TABLES FETCH FIRST 50 ROWS ONL
 ```
 15. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
-sql sys/upt.2023@localhost:1521/XE @lab_script_01.sql
-```
-15. Iniciar una nueva consulta, escribir (reemplazando con su nombre y Apellido) y ejecutar lo siguiente:
-```
-CREATE SMALLFILE TABLESPACE 'nombreApellido' DATAFILE '/opt/oracle/oradata/XE/cursos.dbf' SIZE 50M AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO DEFAULT NOCOMPRESS
+cat lab_oracle_01.sql | sql sys/upt.2023@localhost:1521/XE as sysdba
+CREATE SMALLFILE TABLESPACE nombreApellido DATAFILE '/opt/oracle/oradata/XE/cursos.dbf' SIZE 50M AUTOEXTEND ON NEXT 1M MAXSIZE UNLIMITED LOGGING EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO DEFAULT NOCOMPRESS
 ```
 16. Ejecutar el siguiente comando en Powershell para eliminar el conetenedor generado.
 ```
