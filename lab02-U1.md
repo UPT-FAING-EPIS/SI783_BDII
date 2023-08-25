@@ -70,7 +70,7 @@ Contraseña: Upt.2023
 
 14. En el terminal, utilizar `sql` (sino se encuentra instalado puede ejecutar: `scoop install sqlcl`) para consultar todas las tablas existentes, para ejecutar lo siguiente:
 ```Bash
-echo 'SELECT * FROM ALL_TABLES' | sql sys/upt.2023@localhost:1521/XE
+echo 'SELECT TABLE_NAME, TABLESPACE_NAME FROM ALL_TABLES FETCH FIRST 50 ROWS ONLY;' | sql sys/upt.2023@localhost:1521/XE as sysdba
 ```
 15. Iniciar una nueva consulta, escribir y ejecutar lo siguiente:
 ```
