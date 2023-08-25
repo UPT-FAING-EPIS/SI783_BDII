@@ -59,11 +59,13 @@ SELECT BANNER FROM v$version;
 ```
 11. Para salir escriba el comando exit.
 
-12. En una pestaña nueva del navegador de internet acceder a la siguiente dirección:https://localhost:5500/em e Iniciar sesión con los siguientes datos
+12. En una pestaña nueva del navegador de internet acceder a la siguiente dirección: https://localhost:5500/em e Iniciar sesión con los siguientes datos y presionar login:
 ```
 Usuario: sys
 Contraseña: Upt.2023
 ```
+![image](https://github.com/UPT-FAING-EPIS/SI783_BDII/assets/10199939/e15f0849-78b0-41bc-b8fb-0253cf989e08)
+
 13. Capture la pantalla de su servidor como parte de la actividad del laboratorio, anote el nombre de la instancia (SID).
 
 14. En el terminal, utilizar `sql` (sino se encuentra instalado puede ejecutar: `scoop install sqlcl`) para consultar todas las tablas existentes, para ejecutar lo siguiente:
