@@ -20,7 +20,7 @@
 
 ## CONSIDERACIONES INICIALES
   * Clonar el repositorio mediante git para tener los recursos necesaarios
-
+aws ec2 authorize-security-group-ingress --group-id sg-0c9ec60f3f780e48c --protocol tcp --port 3306 --cidr 0.0.0.0/0
 ## DESARROLLO
 1. En un navegado de internet, iniciar el laboratorio de Learner Lab en AWS Academy.
 2. Una vez iniciado el laboratorio (AWS con semaforo verde), hacer click en la pestaña AWS Details, y hacer click en el boton Show al lado de AWS CLI, copiar los valores
