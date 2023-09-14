@@ -28,6 +28,8 @@ https://www.linuxfoundation.org/blog/blog/an-introduction-to-the-aws-command-lin
 3. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
 4. Ejecutar el siguiente comando para guardar las credenciales (de ser necesario crear previamente la carpeta .aws)
 ```
+cd
+mkdir .aws
 notepad ./.aws/credentials
 ```
 5. Copiar el contenido del paso 2 en este archivo, una vez copiado, guardar y cerrar el notepad.
