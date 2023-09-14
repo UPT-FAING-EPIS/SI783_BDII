@@ -23,10 +23,15 @@
 aws ec2 authorize-security-group-ingress --group-id sg-0c9ec60f3f780e48c --protocol tcp --port 3306 --cidr 0.0.0.0/0
 https://www.linuxfoundation.org/blog/blog/an-introduction-to-the-aws-command-line-tool-part-2
 ## DESARROLLO
-1. En un navegado de internet, iniciar el laboratorio de Learner Lab en AWS Academy.
+
+### PARTE I: CREACION DE LA BASE DE DATOS
+1. En el navegador de internet, iniciar el laboratorio de Learner Lab en AWS Academy.
 2. Una vez iniciado el laboratorio (AWS con semaforo verde), hacer click en la pestaña AWS Details, y hacer click en el boton Show al lado de AWS CLI, copiar los valores
+
+![image](https://github.com/UPT-FAING-EPIS/SI783_BDII/assets/10199939/f31c02f0-76ed-468b-9733-2cee0edd44e0)
+
 3. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-4. Ejecutar el siguiente comando para guardar las credenciales (de ser necesario crear previamente la carpeta .aws)
+5. En el Terminal, ejecutar el siguiente comando para guardar las credenciales (de ser necesario crear previamente la carpeta .aws)
 ```
 cd
 mkdir .aws
