@@ -31,18 +31,24 @@ https://www.linuxfoundation.org/blog/blog/an-introduction-to-the-aws-command-lin
 ![image](https://github.com/UPT-FAING-EPIS/SI783_BDII/assets/10199939/f31c02f0-76ed-468b-9733-2cee0edd44e0)
 
 3. Iniciar la aplicación Powershell o Windows Terminal en modo administrador 
-5. En el Terminal, ejecutar el siguiente comando para guardar las credenciales (de ser necesario crear previamente la carpeta .aws)
+4. En el Terminal, ejecutar el siguiente comando para guardar las credenciales en la ruta ~/.aws/credentials.
 ```
 cd
 mkdir .aws
 notepad ./.aws/credentials
 ```
-5. Copiar el contenido del paso 2 en este archivo, una vez copiado, guardar y cerrar el notepad.
-6. En el Terminal ejecutar el siguiente comando
+> Copiar el contenido del paso 2 en este archivo, una vez copiado, guardar y cerrar el notepad.
+5. En el Terminal, ejecutar el siguiente comando para guardar las credenciales en la ruta ~/.aws/config.
 ```
-aws configure
+notepad ./.aws/credentials
 ```
-7. Presionar 2 veces enter y cuando se solicite Default region name colocar: us-east-1, luego presionar una vez mas enter para terminar la configuración.
+> colocar el siguiente contenido
+```
+[default]
+region = us-east-1
+```
+> Una vez copiado, guardar y cerrar el notepad.
+6. En el Terminal, ejecutar el siguiente comando para crear una nueva base de datos.
 
 8. Verificar las instancias de base de datos creadas.
 ```
